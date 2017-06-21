@@ -1,0 +1,140 @@
+------------------------------------------------------------
+--        Script Postgre 
+------------------------------------------------------------
+
+CREATE TYPE D_types AS ENUM ('ad','stand');
+
+
+------------------------------------------------------------
+-- Table: Ingredient
+------------------------------------------------------------
+CREATE TABLE Ingredient(
+	ing_name         VARCHAR (50) NOT NULL ,
+	ing_current_cost FLOAT   ,
+	ing_has_alcohol  BOOL   ,
+	ing_is_cold      BOOL   ,
+	CONSTRAINT prk_constraint_Ingredient PRIMARY KEY (ing_name)
+);
+
+
+------------------------------------------------------------
+-- Table: Recipe
+------------------------------------------------------------
+CREATE TABLE Recipe(
+	rcp_name    VARCHAR (50) NOT NULL ,
+	rcp_is_cold BOOL   ,
+	CONSTRAINT prk_constraint_Recipe PRIMARY KEY (rcp_name)
+);
+
+
+------------------------------------------------------------
+-- Table: Player
+------------------------------------------------------------
+CREATE TABLE Player(
+	pla_name     VARCHAR (50) NOT NULL ,
+	pla_password VARCHAR (50)  ,
+	pla_cash     FLOAT   ,
+	pla_sales    INT   ,
+	CONSTRAINT prk_constraint_Player PRIMARY KEY (pla_name)
+);
+
+
+------------------------------------------------------------
+-- Table: Map_Item
+------------------------------------------------------------
+CREATE TABLE Map_Item(
+	mit_id        SERIAL NOT NULL ,
+	mit_type      D_TYPES ,
+	mit_infuence  FLOAT   ,
+	mit_longitude FLOAT   ,
+	mit_lattitude FLOAT   ,
+	pla_name      VARCHAR (50)  ,
+	map_id        INT   ,
+	CONSTRAINT prk_constraint_Map_Item PRIMARY KEY (mit_id)
+);
+
+
+------------------------------------------------------------
+-- Table: Map
+------------------------------------------------------------
+CREATE TABLE Map(
+	map_id             SERIAL NOT NULL ,
+	map_elapsed_days   INT   ,
+	map_time           TIMETZ   ,
+	map_longitude      FLOAT   ,
+	map_lattitude      FLOAT   ,
+	map_longitude_span FLOAT   ,
+	map_lattitude_span FLOAT   ,
+	CONSTRAINT prk_constraint_Map PRIMARY KEY (map_id)
+);
+
+
+------------------------------------------------------------
+-- Table: Preference
+------------------------------------------------------------
+CREATE TABLE Preference(
+	par_name  VARCHAR (25) NOT NULL ,
+	par_value FLOAT   ,
+	map_id    INT   ,
+	CONSTRAINT prk_constraint_Preference PRIMARY KEY (par_name)
+);
+
+
+------------------------------------------------------------
+-- Table: Sale
+------------------------------------------------------------
+CREATE TABLE Sale(
+	sal_day_number   INT   ,
+	sal_qty          INT   ,
+	sal_price        FLOAT   ,
+	sal_player     	 VARCHAR (50) NOT NULL ,
+	sal_recipe_name  VARCHAR (50) NOT NULL ,
+	CONSTRAINT prk_constraint_Sale PRIMARY KEY (sal_player,sal_recipe_name)
+);
+
+
+------------------------------------------------------------
+-- Table: Production
+------------------------------------------------------------
+CREATE TABLE Production(
+	pro_day_nb            INT   ,
+	pro_qty               INT   ,
+	pro_cost_at_that_time FLOAT   ,
+	pro_player            VARCHAR (50) NOT NULL ,
+	pro_recipe_name       VARCHAR (50) NOT NULL ,
+	CONSTRAINT prk_constraint_Production PRIMARY KEY (pro_player,pro_recipe_name)
+);
+
+
+------------------------------------------------------------
+-- Table: Compose
+------------------------------------------------------------
+CREATE TABLE Compose(
+	quantity INT   ,
+	rcp_name VARCHAR (50) NOT NULL ,
+	ing_name VARCHAR (50) NOT NULL ,
+	CONSTRAINT prk_constraint_Compose PRIMARY KEY (rcp_name,ing_name)
+);
+
+
+------------------------------------------------------------
+-- Table: Access
+------------------------------------------------------------
+CREATE TABLE Access(
+	rcp_name VARCHAR (50) NOT NULL ,
+	pla_name VARCHAR (50) NOT NULL ,
+	CONSTRAINT prk_constraint_Access PRIMARY KEY (rcp_name,pla_name)
+);
+
+
+ALTER TABLE Map_Item ADD CONSTRAINT FK_Map_Item_pla_name FOREIGN KEY (pla_name) REFERENCES Player(pla_name);
+ALTER TABLE Map_Item ADD CONSTRAINT FK_Map_Item_map_id FOREIGN KEY (map_id) REFERENCES Map(map_id);
+ALTER TABLE Preference ADD CONSTRAINT FK_Preference_map_id FOREIGN KEY (map_id) REFERENCES Map(map_id);
+ALTER TABLE Compose ADD CONSTRAINT FK_Compose_rcp_name FOREIGN KEY (rcp_name) REFERENCES Recipe(rcp_name);
+ALTER TABLE Compose ADD CONSTRAINT FK_Compose_ing_name FOREIGN KEY (ing_name) REFERENCES Ingredient(ing_name);
+ALTER TABLE Access ADD CONSTRAINT FK_Access_rcp_name FOREIGN KEY (rcp_name) REFERENCES Recipe(rcp_name);
+ALTER TABLE Access ADD CONSTRAINT FK_Access_pla_name FOREIGN KEY (pla_name) REFERENCES Player(pla_name);
+ALTER TABLE Sale ADD CONSTRAINT FK_Sale_pla_name FOREIGN KEY (sal_player) REFERENCES Player(pla_name);
+ALTER TABLE Sale ADD CONSTRAINT FK_Sale_rcp_name FOREIGN KEY (sal_recipe_name) REFERENCES Recipe(rcp_name);
+ALTER TABLE Production ADD CONSTRAINT FK_Production_pla_name FOREIGN KEY (pro_player) REFERENCES Player(pla_name);
+ALTER TABLE Production ADD CONSTRAINT FL_Production_rcp_name FOREIGN KEY (pro_recipe_name) REFERENCES Recipe(rcp_name);
