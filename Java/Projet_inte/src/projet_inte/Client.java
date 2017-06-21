@@ -41,6 +41,23 @@ public class Client {
     public void setLongitude(float longitude) {
         this.longitude = longitude;
     }
+
+    /**
+     * 
+     * @return les joueurs
+     */
+    public Joueur[] getJoueur() {
+        return joueur;
+    }
+
+    /**
+     * Définit les joueurs
+     * @param joueur 
+     */
+    public void setJoueur(Joueur[] joueur) {
+        this.joueur = joueur;
+    }
+    
     
     /**
      * 
