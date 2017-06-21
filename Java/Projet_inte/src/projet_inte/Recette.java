@@ -96,6 +96,10 @@ public class Recette {
      * Calcul le nouveau cout de la recette
      */
     public void CalculCout(){
-        //TODO
+        float newCout =0;
+        for(int i = 0; this.composition.length>i; i++ ){
+            newCout += this.composition[i].getPrix();
+        }
+        this.cout = newCout;
     }
 }

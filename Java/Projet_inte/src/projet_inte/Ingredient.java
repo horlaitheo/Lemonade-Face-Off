@@ -5,6 +5,8 @@
  */
 package projet_inte;
 
+import java.util.Random;
+
 /**
  *
  * @author Théo
@@ -58,6 +60,14 @@ public class Ingredient {
      * calcul la nouveau prix des ingrédients
      */
     public void fluctuation(){
-        //TODO
+        Random rand = new Random();
+        float nombreAleatoire = rand.nextInt(100 + 1)-50;
+        nombreAleatoire /= 10;
+        nombreAleatoire = this.prix+(this.prix*nombreAleatoire)/100;
+        
+        /* tronquage à 2 nombres après la virgule*/
+        nombreAleatoire *= 100;
+        nombreAleatoire = (float) Math.floor(nombreAleatoire);
+        this.prix =nombreAleatoire /= 100;
     }
 }

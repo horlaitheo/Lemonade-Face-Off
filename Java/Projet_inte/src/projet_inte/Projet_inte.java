@@ -5,6 +5,8 @@
  */
 package projet_inte;
 
+import java.util.Random;
+
 /**
  *
  * @author Théo
@@ -16,7 +18,14 @@ public class Projet_inte {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        
+        Ingredient ing = new Ingredient("citron", (float) 0.5);
+        System.out.println(ing.getPrix());
+        ing.fluctuation();
+        System.out.println(ing.getPrix());
+        ing.fluctuation();
+        System.out.println(ing.getPrix());
+        ing.fluctuation();
+        System.out.println(ing.getPrix());
     }
     
 }
