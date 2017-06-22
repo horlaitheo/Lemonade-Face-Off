@@ -17,7 +17,7 @@ public class Stand extends Emplacement{
      * @param lattitude
      * @param influence 
      */
-    public Stand(float longitude, float lattitude, float influence) {
+    public Stand(float longitude, float lattitude, float influence) { //A CHANGER
         this.longitude = longitude;
         this.lattitude = lattitude;
         this.influence = influence;
