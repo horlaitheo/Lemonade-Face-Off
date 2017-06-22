@@ -5,6 +5,8 @@
  */
 package projet_inte;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Théo
@@ -13,7 +15,7 @@ public class Recette {
     private String nom;
     private float cout;
     private float prix;
-    private Ingredient composition[];
+    private ArrayList<Ingredient> composition;
     
     /**
      * Constructeur
@@ -21,7 +23,7 @@ public class Recette {
      * @param cout
      * @param composition 
      */
-    public Recette(String nom, float cout, float prix, Ingredient[] composition) {
+    public Recette(String nom, float cout, float prix, ArrayList<Ingredient> composition) {
         this.prix = prix;
         this.nom = nom;
         this.cout = cout;
@@ -75,20 +77,20 @@ public class Recette {
     public void setCout(float cout) {
         this.cout = cout;
     }
-    
+
     /**
      * 
-     * @return le tableau d'ingrédient de la recette
+     * @return la composition
      */
-    public Ingredient[] getComposition() {
+    public ArrayList<Ingredient> getComposition() {
         return composition;
     }
-    
+
     /**
-     * Définit le tableau d'ingrédient de la recette
+     * Définit la composition
      * @param composition 
      */
-    public void setComposition(Ingredient[] composition) {
+    public void setComposition(ArrayList<Ingredient> composition) {
         this.composition = composition;
     }
     
@@ -97,8 +99,8 @@ public class Recette {
      */
     public void CalculCout(){
         float newCout =0;
-        for(int i = 0; this.composition.length>i; i++ ){
-            newCout += this.composition[i].getPrix();
+        for(int i = 0; this.composition.size()>i; i++ ){
+            newCout += this.composition.get(i).getPrix();
         }
         this.cout = newCout;
     }

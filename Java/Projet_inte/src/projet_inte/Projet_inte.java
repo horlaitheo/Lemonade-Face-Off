@@ -5,6 +5,7 @@
  */
 package projet_inte;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -18,14 +19,30 @@ public class Projet_inte {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        Ingredient ing = new Ingredient("citron", (float) 0.5);
-        System.out.println(ing.getPrix());
-        ing.fluctuation();
-        System.out.println(ing.getPrix());
-        ing.fluctuation();
-        System.out.println(ing.getPrix());
-        ing.fluctuation();
-        System.out.println(ing.getPrix());
+        
+        /* ingrédient limonade */
+        Ingredient cit = new Ingredient("citron", (float) 0.20);
+        Ingredient suc = new Ingredient("sucre", (float) 0.20);
+        Ingredient gla = new Ingredient("glace", (float) 0.02);
+        Ingredient eau = new Ingredient("eau", (float) 0);
+        
+        /* Recette de la limonade */
+        ArrayList<Ingredient> composition = new ArrayList();
+        composition.add(cit);
+        composition.add(suc);
+        composition.add(gla);
+        composition.add(eau);
+        composition.add(eau);
+        
+        Recette limonade = new Recette("limonade", (float)0, (float)0, composition);
+        
+        /* Création de la prod */
+        Prod production = new Prod("limonade", 40, (float)1.50);
+                
+        /* Création de la map */
+        ArrayList<Client> client = new ArrayList();
+        
+        Map carte = new Map((float)0, (float)0, (float)0, (float)0, );
     }
     
 }
