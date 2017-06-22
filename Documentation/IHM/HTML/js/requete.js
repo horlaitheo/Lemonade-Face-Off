@@ -1,6 +1,6 @@
 $("#connec").click(function(){
 			
-			$.ajax("http://localhost:5000/idGet").done(function(data){
+			$.ajax("http://limonade-equipe7.herokuapp.com/idGet").done(function(data){
 				//debugger;
 				$("#name").text(data);
 			});
@@ -14,7 +14,7 @@ $("#creat").click(function(){
 			console.log(str)
 			$.ajax({
   				type: "POST",
-				url: "http://localhost:5000/idPost",
+				url: "http://limonade-equipe7.herokuapp.com/idPost",
   				data: str,
   				dataType: 'text'
 			});
@@ -27,7 +27,7 @@ $("#connec").click(function(){
 			console.log(str)
 			$.ajax({
   				type: "POST",
-				url: "http://localhost:5000/idIsValide",
+				url: "http://limonade-equipe7.herokuapp.com/idIsValide",
   				data: str,
   				dataType: 'text'
 			});
