@@ -1,5 +1,5 @@
 $("#connec").click(function(){
-			
+
 			$.ajax("http://limonade-equipe7.herokuapp.com/idGet").done(function(data){
 				//debugger;
 				$("#name").text(data);
@@ -10,7 +10,7 @@ $("#connec").click(function(){
 $("#creat").click(function(){
 
 			str=JSON.stringify($('#name').val());
-			
+
 			console.log(str)
 			$.ajax({
   				type: "POST",
@@ -23,7 +23,7 @@ $("#creat").click(function(){
 $("#connec").click(function(){
 
 			str=JSON.stringify($('#name').val());
-			
+
 			console.log(str)
 			$.ajax({
   				type: "POST",
