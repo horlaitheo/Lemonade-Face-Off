@@ -12,6 +12,7 @@ identifiant=['adrien']
 postSales=[]
 nombre = ['toto','tata','titi']
 
+weather = []
 
 @app.route("/retour", methods=["GET"])
 def gettest():
@@ -61,6 +62,14 @@ def postIdIsValide():
 		else :continue
 	
 	print identifiant
+
+@app.route("/wheather", methods=["POST"])
+def postWheather():
+	global wheather
+	weather = request.get_data()
+	weather = json.loads(weather)
+	print weather
+	return json.dumps(weather),200,{'Content-Type':'application/json'}
 		
 
 #@app.route("/idGet",methods=["GET"])
@@ -68,4 +77,4 @@ def postIdIsValide():
 #	return "test"
 
 if __name__ == "__main__":
-app.run() 
+	app.run() 
