@@ -1,0 +1,28 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/maxwell/Desktop/1A/Projet_dinte/Serial/main.c
+stdlib.h
+-
+stdio.h
+-
+string.h
+-
+unistd.h
+-
+stdint.h
+-
+fcntl.h
+-
+termios.h
+-
+errno.h
+-
+sys/ioctl.h
+-
+
