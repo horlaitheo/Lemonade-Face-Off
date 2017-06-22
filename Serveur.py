@@ -63,9 +63,9 @@ def postIdIsValide():
 	
 	print identifiant
 
-@app.route("/wheather", methods=["POST"])
+@app.route("/weather", methods=["POST"])
 def postWheather():
-	global wheather
+	global weather
 	weather = request.get_data()
 	weather = json.loads(weather)
 	print weather
