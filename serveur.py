@@ -10,7 +10,8 @@ CORS(app)
 identifiant=[]
 postSales=[]
 nombre = ['toto','tata','titi']
-weather = ["rainny", "cloudy", "sunny", "heatwave", "thunderstorm"]
+weather = []
+
 
 @app.route("/rdm", methods=["GET"])
 def get():
@@ -40,6 +41,10 @@ def post():
 	return json.dumps(postSales),200,{'Content-Type':'application/json'}
 
 @app.route("/weather", methods=["POST"])
+def post():
+	global weather
+	
+	pass
 
 
 if __name__ == "__main__":
