@@ -13,6 +13,7 @@ public abstract class Emplacement {
     protected float longitude;
     protected float lattitude;
     protected float influence;
+    protected Joueur propietaire;
     
     /**
      * 
@@ -60,6 +61,22 @@ public abstract class Emplacement {
      */
     public void setInfluence(float influence) {
         this.influence = influence;
+    }
+
+    /**
+     * 
+     * @return le propriétaire de cette emplacement
+     */
+    public Joueur getPropietaire() {
+        return propietaire;
+    }
+
+    /**
+     * Définit le propriétaire de cette emplacement
+     * @param propietaire 
+     */
+    public void setPropietaire(Joueur propietaire) {
+        this.propietaire = propietaire;
     }
     
     /**

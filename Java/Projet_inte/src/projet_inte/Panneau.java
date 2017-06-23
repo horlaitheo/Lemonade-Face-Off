@@ -11,7 +11,7 @@ package projet_inte;
  */
 public class Panneau extends Emplacement {
     
-    public Panneau(float longitude, float lattitude, float influence) {
+    public Panneau(float longitude, float lattitude, float influence) { //A CHANGER
         this.longitude = longitude;
         this.lattitude = lattitude;
         this.influence = influence;
