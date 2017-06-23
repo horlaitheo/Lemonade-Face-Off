@@ -9,6 +9,16 @@ body {
   vertical-align: middle !important;
 }
 
+#deconnexion{
+  width:10%;
+  margin-right: 10px;
+}
+
+#reset{
+  width:5%;
+  margin-right: 10px;
+}
+
 #Tab .nav-pills > li > a {
   border-radius: 4px 4px 0 0 ;
 }
@@ -43,6 +53,8 @@ th{
 }
 
 p{
+  text-align: center;
+  width: 50%;
   background: white;
 }
 

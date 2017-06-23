@@ -27,7 +27,8 @@
         </tbody>
       </table>
     </div>
-    <div id="bienvenue" class="container col-md-2"><br><br><h2>Deconnexion</h2></div>
+    <button id="deconnexion" class="btn btn-warning col-md-1">Deconnexion</button>
+    <button id="reset" class="btn btn-danger col-md-1">Reset</button>
   </div>
 
   <div id="Tab" class="container col-md-6">
@@ -50,46 +51,46 @@
                 <tr>
                   <th><h4><b>Produits</b></h4></th>
                   <th><h4><b>Nombre</b></4></th>
-                    <th><h4><b>Prix</b></h4></th>
                     <th><h4><b>Prix de vente</b></h4></th>
+                    <th><h4><b>Prix de production</b></h4></th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
                     <td><h4>Limonade</h4></td>
-                    <td><span><input type="text" id="nombrelimonade" size="10" value=""/></span></td>
-                    <td><span><input type="text" id="prixlimonade" size="10" value=""/></span></td>
-                    <td><span><input type="text" id="prixdeventelimonade" size="10" value=""/></span></td>
+                    <td><span><input type="text" id="nombrelimonade" size="5" value=""/></span></td>
+                    <td><span><input type="text" id="prixventelimonade" size="5" value=""/></span> €</td>
+                    <td><span><p type="text" id="prixprodlimonade" value=""/></span> €</td>
                   </tr>
                   <tr>
                     <td><h4>Mojito</h4></td>
-                    <td><span><input type="text" id="nombremojito" size="10" value=""/></span></td>
-                    <td><span><input type="text" id="prixmojito" size="10" value=""/></span></td>
-                    <td><span><input type="text" id="prixdeventemojito" size="10" value=""/></span></td>
+                    <td><span><input type="text" id="nombremojito" size="5" value=""/></span></td>
+                    <td><span><input type="text" id="prixventemojito" size="5" value=""/></span> €</td>
+                    <td><span><p type="text" id="priprodemojito" value=""/></span> €</td>
                   </tr>
                   <tr>
                     <td><h4>Vin chaud</h4></td>
-                    <td><span><input type="text" id="nombrevinchaud" size="10" value=""/></span></td>
-                    <td><span><input type="text" id="prixvinchaud" size="10" value=""/></span></td>
-                    <td><span><input type="text" id="prixdeventevinchaud" size="10" value=""/></span></td>
+                    <td><span><input type="text" id="nombrevinchaud" size="5" value=""/></span></td>
+                    <td><span><input type="text" id="prixventevinchaud" size="5" value=""/></span> €</td>
+                    <td><span><p type="text" id="prixprodvinchaud" value=""/></span> €</td>
                   </tr>
                   <tr>
                     <td><h4>Café</h4></td>
-                    <td><span><input type="text" id="nombrecafe" size="10" value=""/></span></td>
-                    <td><span><input type="text" id="prixcafe" size="10" value=""/></span></td>
-                    <td><span><input type="text" id="prixdeventecafe" size="10" value=""/></span></td>
+                    <td><span><input type="text" id="nombrecafe" size="5" value=""/></span></td>
+                    <td><span><input type="text" id="prixventecafe" size="5" value=""/></span> €</td>
+                    <td><span><p type="text" id="prixprodcafe" value=""/></span> €</td>
                   </tr>
                   <tr>
                     <td><h4>Thé</h4></td>
-                    <td><span><input type="text" id="nombrethe" size="10" value=""/></span></td>
-                    <td><span><input type="text" id="prixthe" size="10" value=""/></span></td>
-                    <td><span><input type="text" id="prixdeventethe" size="10" value=""/></span></td>
+                    <td><span><input type="text" id="nombrethe" size="5" value=""/></span></td>
+                    <td><span><input type="text" id="prixventethe" size="5" value=""/></span> €</td>
+                    <td><span><p type="text" id="prixprodthe" value=""/></span> €</td>
                   </tr>
                   <tr>
                     <td><h4>Coût total</h4></td>
-                    <td><span><input type="text" id="nombrecouttotal" size="10" value=""/></span></td>
-                    <td><span><input type="text" id="prixcouttotal" size="10" value=""/></span></td>
-                    <td><span><input type="text" id="prixdeventecouttotal" size="10" value=""/></span></td>
+                    <td><span><p type="text" id="nombrecouttotal" value=""/></span></td>
+                    <td><span><p type="text" id="prixventecouttotal" value=""/></span> €</td>
+                    <td><span><p type="text" id="prixprodcouttotal" value=""/></span> €</td>
                   </tr>
                 </tbody>
               </table>
@@ -148,6 +149,7 @@
                       <tr>
                         <th><h4><b>Produits</b></h4></th>
                         <th><h4><b>Ingrédients</b></h4></th>
+                        <th><h4><b>Prix</b></h4></th>
                         <th><h4><b>Débloquer</b></h4></th>
                       </tr>
                     </thead>
@@ -162,6 +164,7 @@
                           <li>1 Rhum</li>
                           <li>2 Menthe</li>
                         </td>
+                        <td>500€</td>
                         <td><button id= "debloquer" type="submit" class="btn btn-primary btn-lg">Débloquer!</button></td>
                       </tr>
                       <tr>
@@ -170,14 +173,16 @@
                           <li>1 Epice</li>
                           <li>1 Vin</li>
                         </td>
+                        <td>400€</td>
                         <td><button id= "debloquer" type="submit" class="btn btn-primary btn-lg">Débloquer!</button></td>
                       </tr>
                       <tr>
                         <td><h4>Café</h4></td>
                         <td>
-                          <li>1 Cafe</li>
+                          <li>1 Café</li>
                           <li>1 Sucre</li>
                         </td>
+                        <td>300€</td>
                         <td><button id= "debloquer" type="submit" class="btn btn-primary btn-lg">Débloquer!</button></td>
                       </tr>
                       <tr>
@@ -187,12 +192,8 @@
                           <li>1 Sucre</li>
                           <li>1 Menthe</li>
                         </td>
+                        <td>200€</td>
                         <td><button id= "debloquer" type="submit" class="btn btn-primary btn-lg">Débloquer!</button></td>
-                      </tr>
-                      <td><h4>Prix</h4></td>
-                      <td></td>
-                      <td><p id="prixrecette" size="10" value=""></p></td>
-                    </tr>
                   </tbody>
                 </table>
               </div>
@@ -214,8 +215,8 @@
             </thead>
             <tbody>
               <tr >
-                <td id="meteo"><h4>Sunny</h4></td>
-                <td id="prevision"><h4>Rainy</h4></td>
+                <td id="meteo"><h4>Canicule</h4></td>
+                <td id="prevision"><h4>Pluie</h4></td>
                 <td id="localisation">
                   <p><h4>Ville: Perpignan</h4></p>
                   <p><h4>Latitude: 42°41′51″</h4></p>
@@ -227,8 +228,8 @@
                 </td>
               </tr>
               <tr id="visuel">
-                <td><img id="sunny" src="C:\Users\utilisateur\Documents\IMERIR\Lemonade-Face-Off\Documentation\IHM\HTML\sunny.png" alt="sunny"></td>
-                <td><img id="rainy" src="C:\Users\utilisateur\Documents\IMERIR\Lemonade-Face-Off\Documentation\IHM\HTML\rainy.png" alt="rainy"></td>
+                <td><img id="sunny" src="C:\Users\utilisateur\Documents\IMERIR\Lemonade-Face-Off\HTML\sunny.png" alt="sunny"></td>
+                <td><img id="rainy" src="C:\Users\utilisateur\Documents\IMERIR\Lemonade-Face-Off\HTML\rainy.png" alt="rainy"></td>
                 <td>
 
                 </td>
