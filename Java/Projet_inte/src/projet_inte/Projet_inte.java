@@ -18,7 +18,9 @@ public class Projet_inte {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        /*        
+        *   SETUP 
+        */
         
         /* ingrédient limonade */
         Ingredient cit = new Ingredient("citron", (float) 0.20);
@@ -37,12 +39,71 @@ public class Projet_inte {
         Recette limonade = new Recette("limonade", (float)0, (float)0, composition);
         
         /* Création de la prod */
-        Prod production = new Prod("limonade", 40, (float)1.50);
+        Prod prod = new Prod("limonade", 40, (float)1.50);
                 
         /* Création de la map */
         ArrayList<Client> client = new ArrayList();
+        ArrayList<Joueur> joueur = new ArrayList();
         
-        Map carte = new Map((float)0, (float)0, (float)0, (float)0, );
+        Map carte = Map.getInstance(0, 0, 10, 10, joueur, client);
+        
+        ArrayList<Recette> recette = new ArrayList();
+        recette.add(limonade);
+        ArrayList<Prod> production = new ArrayList();
+        production.add(prod);
+        
+        carte.createJoueur("player 1", production, recette);
+        carte.tailleMap();
+        carte.createJoueur("player 2", production, recette);
+        carte.tailleMap();
+        carte.NombreClient();
+        
+        /*
+        *  JEU DE TEST
+        */
+        
+        /* affichage taille map */
+        System.out.println("Taille map :");
+        System.out.println(carte.getLat_span());
+        System.out.println(carte.getLong_span());
+        System.out.println(carte.getLattitude());
+        System.out.println(carte.getLongitude());
+        System.out.println();
+        
+        ArrayList<Joueur> jou = carte.getJoueur();
+        /* Affichage des positions des stands des joueurs */
+        System.out.println("Affichage des positions des joueurs");
+        for (int i=0; i<jou.size(); i++){
+            System.out.println(jou.get(i).getEmplacement().get(0).lattitude);
+            System.out.println(jou.get(i).getEmplacement().get(0).longitude);
+        }
+        System.out.println();
+        
+        limonade.CalculCout();
+        
+        
+        /* Création de la prod */
+        for (int i=0; i<jou.size(); i++){
+            jou.get(i).CalculProd();
+        }
+        
+        /* Affichage du budget */
+        System.out.println("Affichage des budget: ");
+        for (int i=0; i<jou.size(); i++){
+            System.out.println(jou.get(i).getBudget());
+        }
+        System.out.println();
+        
+        ArrayList<String> weather = new ArrayList();
+        weather.add("sunny");
+        carte.LancerVente(weather);
+        
+        /* Affichage du budget */
+        System.out.println("Affichage des budget: ");
+        for (int i=0; i<jou.size(); i++){
+            System.out.println(jou.get(i).getBudget());
+        }
+        System.out.println();
     }
     
 }
