@@ -7,6 +7,8 @@ package projet_inte;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -58,6 +60,8 @@ public class Projet_inte {
         carte.tailleMap();
         carte.NombreClient();
         
+        Communication com = new Communication();
+        
         /*
         *  JEU DE TEST
         */
@@ -94,9 +98,14 @@ public class Projet_inte {
         }
         System.out.println();
         
-        ArrayList<String> weather = new ArrayList();
-        weather.add("sunny");
-        carte.LancerVente(weather);
+        /* Récupération de la météo et lancement des ventes */
+        //ArrayList<String> weather = new ArrayList();
+        //weather.add("sunny");
+        try {
+            carte.LancerVente(com.GetWeather());
+        } catch (Exception ex) {
+            Logger.getLogger(Projet_inte.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         /* Affichage du budget */
         System.out.println("Affichage des budget: ");
