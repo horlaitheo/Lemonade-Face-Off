@@ -14,7 +14,7 @@ nombre = ['toto','tata','titi']
  
 weather = []
  
-@app.route("/reset", methods=["GET"])
+@app.route("/GET/reset", methods=["GET"])
 def getReset():
 	global nombre
 	temp = random.choice(nombre)
@@ -25,20 +25,51 @@ def getWeather():
 	tmp={"weather":"sunny"}
 	return json.dumps(tmp),200,{'Content-Type':'application/json'}
 
-@app.route("/map", methods=["GET"])
+@app.route("/GET/map", methods=["GET"])
 def getmap():
 	#tmp={"map"{"region":"perpignan","ranking":["Kevin","adam"],"itemsByPlayer":{"kind":"shop","owner":"Jack336","location":coordinate{"latitude":0.6,"longitude":5.7},"influance":10.8},"PlayerInfo":{"jean"{"cash":3000.50,"sales":80,"profit":100.8,"drinksOffered":["name":"Mojito","price":5.80,"hasAlcohol":True,"isCold":True]}}}}
 	return json.dumps(tmp),200,{'Content-Type':'application/json'}
+
+
+@app.route("/GET/ingredients", methods=["GET"])
+def getIngredienst():
+	# TODO
+
+
+	return json.dumps(),200,{'Content-Type':'application/json'}
+
+@app.route("/GET/map/<PlayerName>", methods=["GET"])
+def getMapPlayer():
+	# TODO
+
+
+	return json.dumps(),200,{'Content-Type':'application/json'}
+
+@app.route("/POST/quitter", methods=["POST"])
+def postquitter():
+	# TODO
+
+	
+	return json.dumps(),200,{'Content-Type':'application/json'}
+ 
+
+@app.route("/POST/rejoindre", methods=["POST"])
+def postRejoindre():
+	# TODO
+
+	
+	return json.dumps(),200,{'Content-Type':'application/json'}
  
  
-@app.route("/sales",methods=["POST"])
+ 
+@app.route("/POST/sales",methods=["POST"])
 def postSales():
  	global  postSales
  	postSales = request.get_json()
  	print postSales
 
  
-@app.route("/idPost",methods=["POST"])
+@app.route("/POST/idPost",methods=["POST"])
 def postId():
  	global  identifiant
  	#tmp = request.get_json()
@@ -48,7 +79,7 @@ def postId():
  	print identifiant
  	return json.dumps(identifiant),200,{'Content-Type':'application/json'}
  
-@app.route("/idIsValide",methods=["POST"])
+@app.route("/POST/idIsValide",methods=["POST"])
 def postIdIsValide():
  	global  identifiant
  	idvalide= request.get_data()
@@ -67,6 +98,13 @@ def postWheather():
  	weather.append(tmp)
  	print weather
  	return json.dumps(weather),200,{'Content-Type':'application/json'}
+
+@app.route("/POST/actions/<PlayerName>", methods=["POST"])
+def postAction():
+	# TODO
+
+	
+	return json.dumps(),200,{'Content-Type':'application/json'}
  		
  
 #@app.route("/idGet",methods=["GET"])
