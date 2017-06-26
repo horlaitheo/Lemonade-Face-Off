@@ -81,3 +81,45 @@ table tr td{
 #tableargent tr td{
   width: 50%;
 }
+
+/*.clock {
+  width: 200px;
+  height: 200px;
+  border: 8px solid #353535;
+  border-radius: 50%;
+  box-shadow:0 0 16px rgba(0,150,255,0.3) inset
+}
+
+.clock:before,
+.clock:after {
+  content: "";
+  position: absolute;
+  height: 128px;
+  width: 8px;
+  background: rgba(0,0,0,0.75);
+  border-radius: 4px;
+  bottom: 128px;
+  margin: 0 0 0 -4px;
+  transform-origin: bottom;
+  animation-name: Clock;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  box-shadow:0 16px 0px rgba(0,0,0,0.75)
+}
+
+.clock:before {
+  animation-duration: 720s;
+  height:50px;
+}
+.clock:after {
+  animation-duration: 60s;
+  height:85px;
+}
+@keyframes Clock {
+  0% {
+    transform: rotate(0deg)
+  }
+  100% {
+    transform: rotate(360deg)
+  }
+}*/

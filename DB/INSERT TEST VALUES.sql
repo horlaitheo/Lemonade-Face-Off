@@ -3,7 +3,7 @@
 ------------------------------------------------------------
 
 INSERT INTO map VALUES
-	(0,0,NULL,40,55,112,120); 
+	(0,2,36,40,55,112,120); 
 
 INSERT INTO player VALUES
 	('Toto','',10000,0),
@@ -36,3 +36,16 @@ INSERT INTO map_item VALUES
 	(0,'stand',10,0,0,'Toto',0),
 	(1,'stand',10,10,10,'Paul',0),
 	(2,'stand',10,5,5,'Henry',0);
+
+INSERT INTO preference VALUES 
+	('budget',100,0),
+	('fluctuation',5,0),
+	('population',100,0),
+	('pub_petit',5,0),
+	('pub_moyen',15,0),
+	('pub_grand',50,0),
+	('journee',10,0),
+	('prix_mojito',600,0),
+	('prix_vinc',100,0),
+	('prix_cafe',200,0),
+	('prix_the',200,0);
