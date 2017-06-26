@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
 
-  <link rel="stylesheet" href="jeu2.css"/>
+  <link rel="stylesheet" href="jeu.css"/>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="css/bootstrap.css">
 
@@ -246,3 +246,17 @@
       <script type="text/javascript" src="js/requete.js"></script>
       </html>
       <script src="js/bootstrap.min.js"></script>
+
+      <script>
+        //	tmp={"weather":"sunny"}
+        $(function(){
+          var server="http://localhost:5000/"
+
+          $.ajax(server+'/metrology',{
+            method:'GET',
+            success: function(getWeather){
+              console.log(JSON.parse(weather))
+            }
+          })
+        })
+      </script>
