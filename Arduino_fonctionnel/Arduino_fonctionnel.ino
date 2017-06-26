@@ -92,22 +92,22 @@ void setup() {
   lcd.begin(16, 2);              // start the library
   lcd.setCursor(0,0);
   lcd.print("Bonjour"); // print a simple message*/
-  /*while(!Serial){
+  while(!Serial){
     
-  }*/
+  }
   
   //remplissage du tableau de structure pour pouvoir gerer la météo plus facilement
   tab_weather[0].weather=("rainny");
   tab_weather[1].weather=("cloudy");
   tab_weather[2].weather=("sunny");
   tab_weather[3].weather=("heatwave");
-  tab_weather[4].weather=("thunder");
+  tab_weather[4].weather=("thunderstrom");
 }
 
 void loop() { // run over and over      
   if (millis()-horloge >= accl + 30000){
     tik = tik +1;
-    Serial.print("@"),Serial.print(tik),Serial.print(" "),Serial.print(current_weather),Serial.print(" " ),Serial.print(previous_weather),Serial.println("!");
+    Serial.print(tik),Serial.print(" "),Serial.print(current_weather),Serial.print(" " ),Serial.println(previous_weather);
     horloge = millis();
     if(tik%24 == 0){
       weather_f();
@@ -118,13 +118,11 @@ void loop() { // run over and over
   if((read_LCD_buttons() == 1) & ((millis()-start_time)>200)){
     start_time = millis();
     accl = accl +200;
-    Serial.println(accl);
     affichage();
   }
   if((read_LCD_buttons() == 2) & ((millis()-start_time)>200) & accl>-29800){
     start_time = millis();
     accl = accl -200;
-    Serial.println(accl);
     affichage();
   }
 }
