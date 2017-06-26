@@ -18,12 +18,13 @@ int adc_key_in  = 0;
 uint32_t tik = 0;
 uint32_t horloge = 0;
 long accl = 0; //variable pour gerer l'acceleration du jeu 
-int start_time =0;
+uint32_t start_time =0;
+int jour = 0;
 
 struct weather_s{
   String weather;
 };
-weather_s tab_weather[4];
+weather_s tab_weather[5];
 
 String previous_weather = "cloudy";
 String current_weather = "cloudy";
@@ -68,55 +69,63 @@ void weather_f(){
   if(rdm_weather>98 && rdm_weather<=100){
     current_weather = tab_weather[((prev_rdm)+(2*indice)+5)%5].weather;
   }
-  
   previous_weather= tab_weather[rdm_prev_weather].weather;
   prev_rdm = rdm_prev_weather;
 }
 
-
-
-
-
+//fonction d'affichage
+void affichage(){
+  lcd.clear();
+  lcd.setCursor(0,0);
+  lcd.print(current_weather);
+  lcd.print(">");
+  lcd.print(previous_weather); 
+  lcd.setCursor(0,1);
+  lcd.print("temp h ");
+  lcd.print(30000 + accl);
+  lcd.print("ms");
+}
 
 void setup() {
-  //remplissage du tableau de structure pour pouvoir gerer la météo plus facilement
-  tab_weather[0].weather=("rainny");
-  tab_weather[1].weather=("cloudy");
-  tab_weather[2].weather=("sunny");
-  tab_weather[3].weather=("heatwave");
-  tab_weather[4].weather=("rainny");
-
-  
   Serial.begin(9600);
   Serial.println("Bonjour");
-  /*lcd.begin(16, 2);              // start the library
+  lcd.begin(16, 2);              // start the library
   lcd.setCursor(0,0);
   lcd.print("Bonjour"); // print a simple message*/
   /*while(!Serial){
     
   }*/
+  
+  //remplissage du tableau de structure pour pouvoir gerer la météo plus facilement
+  tab_weather[0].weather=("rainny");
+  tab_weather[1].weather=("cloudy");
+  tab_weather[2].weather=("sunny");
+  tab_weather[3].weather=("heatwave");
+  tab_weather[4].weather=("thunder");
 }
 
-void loop() { // run over and over
-  
-  if (millis()-horloge >= accl + 1000){
+void loop() { // run over and over      
+  if (millis()-horloge >= accl + 30000){
     tik = tik +1;
     Serial.print("@"),Serial.print(tik),Serial.print(" "),Serial.print(current_weather),Serial.print(" " ),Serial.print(previous_weather),Serial.println("!");
     horloge = millis();
     if(tik%24 == 0){
       weather_f();
     }
+    affichage();
   }
 
   if((read_LCD_buttons() == 1) & ((millis()-start_time)>200)){
     start_time = millis();
     accl = accl +200;
     Serial.println(accl);
+    affichage();
   }
-  if((read_LCD_buttons() == 2) & ((millis()-start_time)>200) & accl>-1000){
+  if((read_LCD_buttons() == 2) & ((millis()-start_time)>200) & accl>-29800){
     start_time = millis();
     accl = accl -200;
     Serial.println(accl);
+    affichage();
   }
 }
 
