@@ -6,8 +6,16 @@
 
 #IncludeRegexTransform: 
 
-/home/maxwell/Desktop/1A/Projet_dinte/Langage_C/main.c
+/home/maxwell/Desktop/1A/Projet_dinte/C_fonctionnel/main.c
+stdlib.h
+-
 stdio.h
+-
+unistd.h
+-
+fcntl.h
+-
+termios.h
 -
 curl/curl.h
 -
