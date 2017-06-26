@@ -5,10 +5,12 @@
  */
 package projet_inte;
 
+import Graph.GraphSwing;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Application;
 
 /**
  *
@@ -113,6 +115,8 @@ public class Projet_inte {
             System.out.println(jou.get(i).getBudget());
         }
         System.out.println();
+        
+        Application.launch(GraphSwing.class, args);
     }
     
 }
