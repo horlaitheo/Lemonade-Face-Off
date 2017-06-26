@@ -60,7 +60,7 @@ CREATE TABLE Map_Item(
 CREATE TABLE Map(
 	map_id             SERIAL NOT NULL ,
 	map_day_nb		   INT   ,
-	map_time           TIMETZ   ,
+	map_time           BIGINT   ,
 	map_longitude      FLOAT   ,
 	map_lattitude      FLOAT   ,
 	map_longitude_span FLOAT   ,
