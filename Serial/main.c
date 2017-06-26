@@ -1,28 +1,23 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include <string.h>
 #include <unistd.h>
-#include <stdint.h>
 #include <fcntl.h>
 #include <termios.h>
-#include <errno.h>
-#include <sys/ioctl.h>
+
 
 #define DEBUG 1
 
 int main(int argc, char *argv[])
 {
-    int fd, n, i;
-    char buf[64] = "temp text";
+    ssize_t n;
+    int fd, i;
+    char buf[64];
     struct termios toptions;
-
+    int tik= 0;
 
     /* open serial port */
-    for (int i = 0; i < 63; ++i) {
-        printf("%c", buf[i]);
-    }
     printf("\n");
-    fd = open("/dev/ttyACM2", O_RDWR | O_NOCTTY);
+    fd = open("/dev/ttyACM0", O_RDWR | O_NOCTTY);
     printf("fd opened as %i\n", fd);
 
     /* wait for the Arduino to reboot */
@@ -43,24 +38,16 @@ int main(int argc, char *argv[])
     /* commit the serial port settings */
     tcsetattr(fd, TCSANOW, &toptions);
 
-    /* Send byte to trigger Arduino to send string back */
-    write(fd, "0", 1);
-    /* Receive string from Arduino */
-    n = read(fd, buf, 64);
-    /* insert terminating zero in the string */
-    buf[n] = 0;
-
-    printf("%i bytes read, buffer contains: %s\n", n, buf);
-
-    if(DEBUG)
-    {
-        printf("Printing individual characters in buf as integers...\n\n");
-        for(i=0; i< n; i++)
-        {
-            printf("Byte %i:%i, ",i+1, (int)buf[i]);
+    //printf("Byte :%i, ", (int)buf[0]);
+    for(i = 0;i<1000;i++) {
+        /* Receive string from Arduino */
+        n = read(fd, buf, 64);
+        buf[n] = 0;
+        if (buf[1] == '1') {
+            tik = tik + 1;
+            printf("tik: %i\n", tik);
+            printf("heure :%i\n", tik % 24);
         }
-        printf("\n");
     }
 
-    return 0;
 }

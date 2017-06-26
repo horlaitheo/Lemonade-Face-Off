@@ -30,7 +30,7 @@ public class Map {
      * @param joueur 
      * @param client 
      */
-    public Map(float longitude, float lattitude, float long_span, float lat_span, ArrayList<Joueur> joueur, ArrayList<Client> client) {
+    private Map(float longitude, float lattitude, float long_span, float lat_span, ArrayList<Joueur> joueur, ArrayList<Client> client) {
         this.longitude = longitude;
         this.lattitude = lattitude;
         this.long_span = long_span;
@@ -121,6 +121,38 @@ public class Map {
     }
     
     /**
+     * 
+     * @return les joueurs
+     */
+    public ArrayList<Joueur> getJoueur() {
+        return joueur;
+    }
+    
+    /**
+     * Définit les joueurs
+     * @param joueur 
+     */
+    public void setJoueur(ArrayList<Joueur> joueur) {
+        this.joueur = joueur;
+    }
+
+    /**
+     * 
+     * @return les clients
+     */
+    public ArrayList<Client> getClient() {
+        return client;
+    }
+
+    /**
+     * Définit les clients
+     * @param client 
+     */
+    public void setClient(ArrayList<Client> client) {
+        this.client = client;
+    }
+    
+    /**
      * Mise à jour de la taille de la map
      */
     public void tailleMap(){
@@ -133,9 +165,9 @@ public class Map {
      */
     public void NombreClient(){
         /* les messures de la map */
-        int min_long = (int) (this.long_span-this.longitude);
+        int min_long = (int) (this.longitude-this.long_span);
         int max_long = (int) (this.longitude+this.long_span);
-        int min_lat = (int) (this.lat_span-this.lattitude);
+        int min_lat = (int) (this.lattitude-this.lat_span);
         int max_lat = (int) (this.lattitude+this.lat_span);
         
         /* si il y a trop de client*/
@@ -145,15 +177,17 @@ public class Map {
                this.client.get(i).setLattitude(0);
                this.client.get(i).setLongitude(0);
                this.client.get(i).setJoueur(null);
+               this.client.remove(i);
             }
            /* si il a pas assez de client */
         }else if (this.client.size() < this.joueur.size()*50){
             /* ajout de nouveau client */
-            for(int i=0; i<this.client.size()-this.joueur.size()*50; i++){
+            for(int i=0; this.client.size() < this.joueur.size()*50; i++){
                Random rand = new Random();
                float longi = rand.nextInt(max_long-min_long + 1)+min_long;
                float latti = rand.nextInt(max_lat-min_lat + 1)+min_lat;
-              Client client = new Client(longi, latti, joueur);
+               Client client = new Client(longi, latti, joueur);
+               this.client.add(client);
             }
        }
     }
@@ -166,9 +200,9 @@ public class Map {
      */
     public void createJoueur(String nom, ArrayList<Prod> production, ArrayList<Recette> recette){
         /* les messures de la map */
-        int min_long = (int) (this.long_span-this.longitude);
+        int min_long = (int) (this.longitude-this.long_span);
         int max_long = (int) (this.longitude+this.long_span);
-        int min_lat = (int) (this.lat_span-this.lattitude);
+        int min_lat = (int) (this.lattitude-this.lat_span);
         int max_lat = (int) (this.lattitude+this.lat_span);
         
         /* Création du stand du joueur */
@@ -184,4 +218,37 @@ public class Map {
         this.joueur.add(player);
                
     }
+    
+    public void LancerVente(ArrayList<String> weather){
+        int i=0;
+        switch(weather.get(0)){
+            case "thunderstrom":
+                for(i=this.client.size(); i<this.client.size(); i++){
+                    this.client.get(i).analyse();
+                }
+                break;
+            case "rainny":
+                for(i=(this.client.size()*85)/100; i<this.client.size(); i++){
+                    this.client.get(i).analyse();
+                }
+                break;
+            case "cloudy":
+                for(i=(this.client.size()*70)/100; i<this.client.size(); i++){
+                    this.client.get(i).analyse();
+                }
+                break;
+            case "sunny":
+                for(i = (this.client.size()*25)/100; i<this.client.size(); i++){
+                    this.client.get(i).analyse();
+                }
+                break;
+            case "heatwave":
+                for(i=0; i<this.client.size(); i++){
+                    this.client.get(i).analyse();
+                }
+                break;
+        }
+        
+    }
+   
 }
