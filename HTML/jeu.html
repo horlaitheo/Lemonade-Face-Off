@@ -216,15 +216,15 @@
                 <tbody>
                   <tr >
                     <td><h4 id="meteo">Canicule</h4></td>
-                    <td id="prevision"><h4>Pluie</h4></td>
-                    <td id="localisation">
-                      <p><h4>Ville: Perpignan</h4></p>
-                      <p><h4>Latitude: 42°41′51″</h4></p>
-                      <p><h4>Longitude: 2°53′43″</h4></p>
+                    <td><h4 id="prevision">Pluie</h4></td>
+                    <td>
+                      <p><h4 id="ville">Ville: Perpignan</h4></p>
+                      <p><h4 id="latitude">Latitude: 42°41′51″</h4></p>
+                      <p><h4 id="longitude">Longitude: 2°53′43″</h4></p>
                     </td>
-                    <td id="dateheure">
-                      <p><h4>Jour 1</h4></p>
-                      <p><h4>15:00</h4></p>
+                    <td>
+                      <span><h4 id="jour">Jour 1</h4></span>
+                      <span><h4 id="heure">15:00</h4></span>
                     </td>
                   </tr>
                   <tr id="visuel">
@@ -253,10 +253,42 @@
             $.ajax(server+'/metrology',{
               method: 'GET',
               success: function(getWeather){
-                  console.log(getWeather.weather)
-                  $("#meteo").text(getWeather.weather);
-                }
-              })
-            });
+                console.log(getWeather.weather)
+                $("#meteo").text(getWeather.weather);
+              }
+            })
+
+            $.ajax(server+'/',{
+              method: 'GET',
+              success: function(getPrevision){
+                console.log(getPrevision.prevision)
+                $("#prevision").text(getPrevision.prevision);
+              }
+            })
+
+            $.ajax(server+'/',{
+              method: 'GET',
+              success: function(getVille){
+                console.log(getVille.ville)
+                $("#localisation").text(getVille.ville);
+              }
+            })
+
+            $.ajax(server+'/'{
+              method: 'GET',
+              success: function(getJour){
+                console.log(getJour.jour)
+                $("#jour").text(getJour.jour);
+              }
+            })
+
+            $.ajax(server+'/'{
+              method: 'GET',
+              success: function(getDate){
+                console.log(getDate.date)
+                $("#jour").text(getDate.date);
+              }
+            })
+          });
 
           </script>
