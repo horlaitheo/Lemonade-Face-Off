@@ -16,7 +16,7 @@ int main(void) {
         /* First set the URL that is about to receive our POST. This URL can
            just as well be a https:// URL if that is what should receive the
            data. */
-        curl_easy_setopt(curl, CURLOPT_URL, "https://limonade-equipe7.herokuapp.com/weather/post");
+        curl_easy_setopt(curl, CURLOPT_URL, "https://limonade-equipe7.herokuapp.com/metrology");
         /* Now specify the POST data */
         curl_easy_setopt(curl, CURLOPT_POSTFIELDS, "{\"sunny\":1}");
 

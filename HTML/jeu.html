@@ -194,69 +194,101 @@
                         </td>
                         <td>200€</td>
                         <td><button id= "debloquer" type="submit" class="btn btn-primary btn-lg">Débloquer!</button></td>
-                  </tbody>
-                </table>
+                      </tbody>
+                    </table>
+                  </div>
+                  <br></br>
+                </div>
               </div>
-              <br></br>
+            </div><br>
+
+            <div id="informations"class="container col-md-6">
+              <h2>Informations</h2>
+              <table id="tableinfo"class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th><h3><b>Météo actuelle</b></h3></th>
+                    <th><h3><b>Prévision météo</b></h3></th>
+                    <th><h3><b>Localisation</b></h3></th>
+                    <th><h3><b>Heure</b></h3></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr >
+                    <td><h4 id="meteo">Canicule</h4></td>
+                    <td><h4 id="prevision">Pluie</h4></td>
+                    <td>
+                      <p><h4 id="ville">Ville: Perpignan</h4></p>
+                      <p><h4 id="latitude">Latitude: 42°41′51″</h4></p>
+                      <p><h4 id="longitude">Longitude: 2°53′43″</h4></p>
+                    </td>
+                    <td>
+                      <span><h4 id="jour">Jour 1</h4></span>
+                      <span><h4 id="heure">15:00</h4></span>
+                    </td>
+                  </tr>
+                  <tr id="visuel">
+                    <td><img id="sunny" src="C:\Users\utilisateur\Documents\IMERIR\Lemonade-Face-Off\HTML\sunny.png" alt="sunny"></td>
+                    <td><img id="rainy" src="C:\Users\utilisateur\Documents\IMERIR\Lemonade-Face-Off\HTML\rainy.png" alt="rainy"></td>
+                    <td>
+                    </td>
+                    <td><div class="clock"></div></td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
-          </div>
-        </div><br>
 
-        <div id="informations"class="container col-md-6">
-          <h2>Informations</h2>
-          <table id="tableinfo"class="table table-bordered">
-            <thead>
-              <tr>
-                <th><h3><b>Météo actuelle</b></h3></th>
-                <th><h3><b>Prévision météo</b></h3></th>
-                <th><h3><b>Localisation</b></h3></th>
-                <th><h3><b>Heure</b></h3></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr >
-                <td id="meteo"><h4>Canicule</h4></td>
-                <td id="prevision"><h4>Pluie</h4></td>
-                <td id="localisation">
-                  <p><h4>Ville: Perpignan</h4></p>
-                  <p><h4>Latitude: 42°41′51″</h4></p>
-                  <p><h4>Longitude: 2°53′43″</h4></p>
-                </td>
-                <td id="dateheure">
-                  <p><h4>Jour 1</h4></p>
-                  <p><h4>15:00</h4></p>
-                </td>
-              </tr>
-              <tr id="visuel">
-                <td><img id="sunny" src="C:\Users\utilisateur\Documents\IMERIR\Lemonade-Face-Off\HTML\sunny.png" alt="sunny"></td>
-                <td><img id="rainy" src="C:\Users\utilisateur\Documents\IMERIR\Lemonade-Face-Off\HTML\rainy.png" alt="rainy"></td>
-                <td>
+          </body>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+          <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+          <script type="text/javascript" src="js/requete.js"></script>
+          </html>
 
-                </td>
-                <td></td>
-              </tr>
+          <script src="js/bootstrap.min.js"></script>
 
-            </tbody>
-          </table>
-        </div>
+          <script>
+          $(function(){
+            var server="http://limonade-equipe7.herokuapp.com/"
 
-      </body>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
-      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-      <script type="text/javascript" src="js/requete.js"></script>
-      </html>
-      <script src="js/bootstrap.min.js"></script>
+            $.ajax(server+'/metrology',{
+              method: 'GET',
+              success: function(getWeather){
+                console.log(getWeather.weather)
+                $("#meteo").text(getWeather.weather);
+              }
+            })
 
-      <script>
-        //	tmp={"weather":"sunny"}
-        $(function(){
-          var server="http://localhost:5000/"
+            $.ajax(server+'/',{
+              method: 'GET',
+              success: function(getPrevision){
+                console.log(getPrevision.prevision)
+                $("#prevision").text(getPrevision.prevision);
+              }
+            })
 
-          $.ajax(server+'/metrology',{
-            method:'GET',
-            success: function(getWeather){
-              console.log(JSON.parse(weather))
-            }
-          })
-        })
-      </script>
+            $.ajax(server+'/',{
+              method: 'GET',
+              success: function(getVille){
+                console.log(getVille.ville)
+                $("#localisation").text(getVille.ville);
+              }
+            })
+
+            $.ajax(server+'/'{
+              method: 'GET',
+              success: function(getJour){
+                console.log(getJour.jour)
+                $("#jour").text(getJour.jour);
+              }
+            })
+
+            $.ajax(server+'/'{
+              method: 'GET',
+              success: function(getDate){
+                console.log(getDate.date)
+                $("#jour").text(getDate.date);
+              }
+            })
+          });
+
+          </script>

@@ -14,7 +14,10 @@ postSales=[]
 nombre = ['toto','tata','titi']
 
 weather = []
- 
+
+
+@app.route("/reset", methods=["GET"])
+
 @app.route("/GET/reset", methods=["GET"])
 def getReset():
 	global nombre
@@ -22,10 +25,13 @@ def getReset():
 	return json.dumps(temp),200,{'Content-Type':'application/json'}
 
 
-
-
+@app.route("/metrology", methods=["GET"])
+def getMetrology():
+    tmp={"weather":"sunny"}
+    return json.dumps(tmp),200, {'Content-Type':'application/json'}
 
 @app.route("/GET/metrology", methods=["GET"])
+
 def getWeather():
 	tmp={"timestamp":1,"weather":"sunny", "test":{"key1":0.5,"key2":"[tao,toa,tia]"}}
 	return json.dumps(tmp),200,{'Content-Type':'application/json'}
@@ -38,7 +44,7 @@ def getmap():
 	#tmp={"map"{"region":"perpignan","ranking":["Kevin","adam"],"itemsByPlayer":{"kind":"shop","owner":"Jack336","location":coordinate{"latitude":0.6,"longitude":5.7},"influance":10.8},"PlayerInfo":{"jean"{"cash":3000.50,"sales":80,"profit":100.8,"drinksOffered":["name":"Mojito","price":5.80,"hasAlcohol":True,"isCold":True]}}}}
 	return json.dumps(tmp),200,{'Content-Type':'application/json'}
 
-	
+
 
 
 @app.route("/GET/ingredients", methods=["GET"])
@@ -52,26 +58,26 @@ def getIngredienst():
 def getMapPlayer():
 	# TODO
 #################################                   POST   						 #######################################################
- 
+
 	return json.dumps(),200,{'Content-Type':'application/json'}
 
 @app.route("/POST/quitter", methods=["POST"])
 def postquitter():
 	# TODO
 
-	
+
 	return json.dumps(),200,{'Content-Type':'application/json'}
- 
+
 
 @app.route("/POST/rejoindre", methods=["POST"])
 def postRejoindre():
 	# TODO
 
-	
+
 	return json.dumps(),200,{'Content-Type':'application/json'}
- 
- 
- 
+
+
+
 @app.route("/POST/sales",methods=["POST"])
 def postSales():
  	global  postSales
@@ -79,7 +85,9 @@ def postSales():
  	print(postSales)
 
 
- 
+
+@app.route("/idPost",methods=["POST"])
+
 @app.route("/POST/idPost",methods=["POST"])
 def postId():
  	global  identifiant
@@ -89,7 +97,9 @@ def postId():
  	identifiant.append(tmp)
  	print(identifiant)
  	return json.dumps(identifiant),200,{'Content-Type':'application/json'}
- 
+
+@app.route("/idIsValide",methods=["POST"])
+
 @app.route("/POST/idIsValide",methods=["POST"])
 def postIdIsValide():
  	global  identifiant
@@ -101,6 +111,9 @@ def postIdIsValide():
  		else :continue
 
  	print(identifiant)
+
+
+@app.route("/meteorology", methods=["POST"])
 
 @app.route("/POST/meterology", methods=["POST"])
 def postWheather():
@@ -114,9 +127,11 @@ def postWheather():
 def postAction():
 	# TODO
 
-	
+
 	return json.dumps(),200,{'Content-Type':'application/json'}
- 		
+
+
+
 #@app.route("/idGet",methods=["GET"])
 #def idGet():
 #	return "test"

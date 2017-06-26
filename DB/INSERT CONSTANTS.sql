@@ -3,16 +3,16 @@
 ------------------------------------------------------------
 
 INSERT INTO ingredient VALUES 
-	('citron', 20, FALSE, FALSE),
-	('glace', 2, FALSE, TRUE),
-	('sucre', 20, FALSE, FALSE),
-	('eau petillante', 20, FALSE, FALSE),
-	('rhum', 100, FALSE, FALSE),
-	('menthe', 30, FALSE, FALSE),
-	('epice vin chaud', 10, FALSE, FALSE),
-	('vin', 100, TRUE, FALSE),
-	('feuilles de thé', 20, FALSE, FALSE),
-	('grains de café', 30, FALSE, FALSE);
+	('citron', 0.2, FALSE, FALSE),
+	('glace', 0.02, FALSE, TRUE),
+	('sucre', 0.2, FALSE, FALSE),
+	('eau petillante', 0.2, FALSE, FALSE),
+	('rhum', 1, FALSE, FALSE),
+	('menthe', 0.3, FALSE, FALSE),
+	('epice vin chaud', 0.1, FALSE, FALSE),
+	('vin', 1, TRUE, FALSE),
+	('feuilles de thé', 0.2, FALSE, FALSE),
+	('grains de café', 0.3, FALSE, FALSE);
 
 INSERT INTO recipe VALUES
 	('limonade', TRUE),
@@ -39,3 +39,16 @@ INSERT INTO compose VALUES
 	(1,'thé','feuilles de thé'),
 	(1,'thé','sucre'),
 	(1,'thé','menthe');
+
+INSERT INTO preference VALUES 
+	('budget',100,0),
+	('fluctuation',5,0),
+	('population',100,0),
+	('pub_petit',5,0),
+	('pub_moyen',15,0),
+	('pub_grand',50,0),
+	('journee',10,0),
+	('prix_mojito',600,0),
+	('prix_vinc',100,0),
+	('prix_cafe',200,0),
+	('prix_the',200,0);
