@@ -21,15 +21,11 @@ def getReset():
 	temp = random.choice(nombre)
 	return json.dumps(temp),200,{'Content-Type':'application/json'}
 
-<<<<<<< HEAD
 
 
 
 
 @app.route("/GET/metrology", methods=["GET"])
-=======
-@app.route("/metrology", methods=["GET"])
->>>>>>> origin/master
 def getWeather():
 	tmp={"timestamp":1,"weather":"sunny", "test":{"key1":0.5,"key2":"[tao,toa,tia]"}}
 	return json.dumps(tmp),200,{'Content-Type':'application/json'}
@@ -106,7 +102,7 @@ def postIdIsValide():
 
  	print(identifiant)
 
-@app.route("/meterology", methods=["POST"])
+@app.route("/POST/meterology", methods=["POST"])
 def postWheather():
  	global weather
  	tmp = request.get_data()
