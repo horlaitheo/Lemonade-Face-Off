@@ -21,15 +21,24 @@ def getReset():
 	temp = random.choice(nombre)
 	return json.dumps(temp),200,{'Content-Type':'application/json'}
 
-@app.route("/metrology", methods=["GET"])
+
+
+
+
+@app.route("/GET/metrology", methods=["GET"])
 def getWeather():
-	tmp={"weather":"sunny"}
+	tmp={"timestamp":1,"weather":"sunny", "test":{"key1":0.5,"key2":"[tao,toa,tia]"}}
 	return json.dumps(tmp),200,{'Content-Type':'application/json'}
+
+
+
 
 @app.route("/GET/map", methods=["GET"])
 def getmap():
 	#tmp={"map"{"region":"perpignan","ranking":["Kevin","adam"],"itemsByPlayer":{"kind":"shop","owner":"Jack336","location":coordinate{"latitude":0.6,"longitude":5.7},"influance":10.8},"PlayerInfo":{"jean"{"cash":3000.50,"sales":80,"profit":100.8,"drinksOffered":["name":"Mojito","price":5.80,"hasAlcohol":True,"isCold":True]}}}}
 	return json.dumps(tmp),200,{'Content-Type':'application/json'}
+
+	
 
 
 @app.route("/GET/ingredients", methods=["GET"])
@@ -42,8 +51,8 @@ def getIngredienst():
 @app.route("/GET/map/<PlayerName>", methods=["GET"])
 def getMapPlayer():
 	# TODO
-
-
+#################################                   POST   						 #######################################################
+ 
 	return json.dumps(),200,{'Content-Type':'application/json'}
 
 @app.route("/POST/quitter", methods=["POST"])
@@ -93,7 +102,7 @@ def postIdIsValide():
 
  	print(identifiant)
 
-@app.route("/meterology", methods=["POST"])
+@app.route("/POST/meterology", methods=["POST"])
 def postWheather():
  	global weather
  	tmp = request.get_data()
