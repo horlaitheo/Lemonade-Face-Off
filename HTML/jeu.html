@@ -215,7 +215,7 @@
                 </thead>
                 <tbody>
                   <tr >
-                    <td id="meteo"><h4>Canicule</h4></td>
+                    <td><h4 id="meteo">Canicule</h4></td>
                     <td id="prevision"><h4>Pluie</h4></td>
                     <td id="localisation">
                       <p><h4>Ville: Perpignan</h4></p>
@@ -247,16 +247,16 @@
           <script src="js/bootstrap.min.js"></script>
 
           <script>
-          //	tmp={"weather":"sunny"}
           $(function(){
-            var server="http://localhost:5000/"
+            var server="http://limonade-equipe7.herokuapp.com/"
 
             $.ajax(server+'/metrology',{
-              method:'GET',
+              method: 'GET',
               success: function(getWeather){
-                console.log(JSON.parse(weather))
+                  console.log(getWeather.weather)
+                  $("#meteo").text(getWeather.weather);
+                }
+              })
+            });
 
-              }
-            })
-          })
           </script>
