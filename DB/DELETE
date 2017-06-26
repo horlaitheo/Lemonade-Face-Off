@@ -1,0 +1,11 @@
+--RETIRER TOUT LES PANNEAUX D'UN JOUEUR
+DELETE FROM map_item
+INNER JOIN player ON map_item.mit_pla_name = player.pla_name
+WHERE player.pla_name = @VAR_NAME;
+
+--RETIRER UN PANNEAU EN PARTICULIER
+DELETE FROM map_item
+WHERE mit_id = @VAR_ID
+
+--RETIRER UN JOUEUR
+DELETE FROM player

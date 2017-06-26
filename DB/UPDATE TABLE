@@ -1,0 +1,21 @@
+--METTRE A JOUR DATE
+UPDATE map
+SET map_day_nb = @VAR_DAY
+WHERE map_id = 0;
+
+--METTRE A JOUR HEURE
+UPDATE map
+SET map_time = @VAR_TIME
+WHERE map_id = 0;
+
+--METTRE A JOUR CASH D'UN JOUER
+UPDATE player
+SET pla_cash = @VAR_CAHS
+WHERE pla_name = @VAR_NAME;
+
+--METTRE A JOUR COUT INGREDIENT
+UPDATE ingredient
+SET ing_current_cost = @VAR_COST
+WHERE ing_name = @VAR_ING;
+
+--

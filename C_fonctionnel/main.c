@@ -49,7 +49,7 @@ int main(int argc, char *argv[])
 
     //printf("Byte :%i, ", (int)buf[0]);
     do{
-            /* Receive string from Arduino */
+        /* Receive string from Arduino */
         n = read(fd, buf, 64);
         buf[n] = 0;
         tik ++ ;

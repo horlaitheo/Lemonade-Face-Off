@@ -1,1 +1,1 @@
-/usr/bin/cc  -g   CMakeFiles/Serial.dir/main.c.o  -o Serial 
+/usr/bin/cc  -g   CMakeFiles/Serial.dir/main.c.o  -o Serial -lcurl 

@@ -52,9 +52,31 @@ AND pro_pla_name = @VAR_NAME;
 ----------------
 
 --GET THAT PLAYER RECIPES
-
 SELECT rcp_name
 FROM recipe
 INNER JOIN access ON access.acc_rcp_name = recipe.rcp_name
 INNER JOIN player ON player.pla_name = access.acc_pla_name
 WHERE player.pla_name = @VAR_NAME;
+
+--LISTE DES INGREDIENT + PRIX
+SELECT ing_name, ing_current_cost, compose.com_quantity
+FROM ingredient
+INNER JOIN compose ON compose.com_ing_name = ingredient.ing_name
+INNER JOIN recipe ON compose.com_rcp_name = recipe.rcp_name
+WHERE recipe.rcp_name = @VAR_RCP;
+
+--COUT TOTAL D'UNE RECETTE
+SELECT SUM (ing_current_cost * compose.com_quantity) as cost
+FROM ingredient
+INNER JOIN compose ON compose.com_ing_name = ingredient.ing_name
+INNER JOIN recipe ON compose.com_rcp_name = recipe.rcp_name
+WHERE recipe.rcp_name = @VAR_RCP;
+
+--RECUP DAY
+SELECT map_day_nb
+FROM map;
+
+
+--RECUP TEMPS
+SELECT map_time
+FROM map;
