@@ -11,18 +11,10 @@ stdlib.h
 -
 stdio.h
 -
-string.h
--
 unistd.h
--
-stdint.h
 -
 fcntl.h
 -
 termios.h
--
-errno.h
--
-sys/ioctl.h
 -
 
