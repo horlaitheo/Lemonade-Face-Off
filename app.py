@@ -17,7 +17,7 @@ weather = []
 
 @app.route("/reset", methods=["GET"])
 =======
- 
+
 @app.route("/GET/reset", methods=["GET"])
 >>>>>>> 838faca50c0e18c99deeb5ed382561c5c31265c9
 def getReset():
@@ -25,7 +25,7 @@ def getReset():
 	temp = random.choice(nombre)
 	return json.dumps(temp),200,{'Content-Type':'application/json'}
 
-@app.route("/metrology", methods=["GET"])
+@app.route("/meteorology", methods=["GET"])
 def getWeather():
 	tmp={"weather":"sunny"}
 	return json.dumps(tmp),200,{'Content-Type':'application/json'}
@@ -57,19 +57,19 @@ def getMapPlayer():
 def postquitter():
 	# TODO
 
-	
+
 	return json.dumps(),200,{'Content-Type':'application/json'}
- 
+
 
 @app.route("/POST/rejoindre", methods=["POST"])
 def postRejoindre():
 	# TODO
 
-	
+
 	return json.dumps(),200,{'Content-Type':'application/json'}
- 
- 
- 
+
+
+
 @app.route("/POST/sales",methods=["POST"])
 >>>>>>> 838faca50c0e18c99deeb5ed382561c5c31265c9
 def postSales():
@@ -81,7 +81,7 @@ def postSales():
 <<<<<<< HEAD
 @app.route("/idPost",methods=["POST"])
 =======
- 
+
 @app.route("/POST/idPost",methods=["POST"])
 >>>>>>> 838faca50c0e18c99deeb5ed382561c5c31265c9
 def postId():
@@ -96,7 +96,7 @@ def postId():
 
 @app.route("/idIsValide",methods=["POST"])
 =======
- 
+
 @app.route("/POST/idIsValide",methods=["POST"])
 >>>>>>> 838faca50c0e18c99deeb5ed382561c5c31265c9
 def postIdIsValide():
@@ -110,7 +110,7 @@ def postIdIsValide():
 
  	print(identifiant)
 
-@app.route("/meterology", methods=["POST"])
+@app.route("/meteorology", methods=["POST"])
 def postWheather():
  	global weather
  	tmp = request.get_data()
@@ -125,10 +125,10 @@ def postWheather():
 def postAction():
 	# TODO
 
-	
+
 	return json.dumps(),200,{'Content-Type':'application/json'}
- 		
- 
+
+
 >>>>>>> 838faca50c0e18c99deeb5ed382561c5c31265c9
 #@app.route("/idGet",methods=["GET"])
 #def idGet():
