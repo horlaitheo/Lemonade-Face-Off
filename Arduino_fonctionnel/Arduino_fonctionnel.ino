@@ -88,7 +88,6 @@ void affichage(){
 
 void setup() {
   Serial.begin(9600);
-  Serial.print(tik),Serial.print(" "),Serial.print(current_weather),Serial.print(" " ),Serial.println(previous_weather);
   lcd.begin(16, 2);              // start the library
   lcd.setCursor(0,0);
   lcd.print("Bonjour"); // print a simple message*/

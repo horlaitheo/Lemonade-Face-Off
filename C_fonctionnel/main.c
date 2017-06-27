@@ -2,7 +2,6 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <fcntl.h>
-#include <termios.h>
 #include <curl/curl.h>
 
 int main(int argc, char *argv[])
@@ -30,7 +29,7 @@ int main(int argc, char *argv[])
         if(fd != -1) {//si la connection est etablie
 
             //Lecture du buffeur
-            n = read(fd, buf, 64);
+            n = read(fd, buf,32);
             if (*buf != '\n') {
                 buf[n] = 0;
                 i = 0;

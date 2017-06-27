@@ -15,8 +15,6 @@ unistd.h
 -
 fcntl.h
 -
-termios.h
--
 curl/curl.h
 -
 
