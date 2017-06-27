@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-  "/home/maxwell/Desktop/1A/untitled/C_fonctionnel/main.c" "/home/maxwell/Desktop/1A/untitled/C_fonctionnel/cmake-build-debug/CMakeFiles/C_fonctionnel.dir/main.c.o"
+  "/home/maxwell/Desktop/1A/Projet_dinte/C_fonctionnel/main.c" "/home/maxwell/Desktop/1A/Projet_dinte/C_fonctionnel/cmake-build-debug/CMakeFiles/C_fonctionnel.dir/main.c.o"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 

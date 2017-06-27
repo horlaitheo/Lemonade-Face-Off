@@ -1,0 +1,21 @@
+/opt/clion-2017/bin/cmake/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/maxwell/Desktop/1A/Projet_dinte/Envoie_serveur
+CMake Error: Could not find cmake module file: CMakeDetermineserveurCompiler.cmake
+CMake Error: Error required internal CMake variable not set, cmake may be not be built correctly.
+Missing variable is:
+CMAKE_serveur_COMPILER_ENV_VAR
+CMake Error: Error required internal CMake variable not set, cmake may be not be built correctly.
+Missing variable is:
+CMAKE_serveur_COMPILER
+CMake Error: Could not find cmake module file: /home/maxwell/Desktop/1A/Projet_dinte/Envoie_serveur/cmake-build-debug/CMakeFiles/3.7.2/CMakeserveurCompiler.cmake
+CMake Error at CMakeLists.txt:2 (project):
+  No CMAKE_serveur_COMPILER could be found.
+
+  Tell CMake where to find the compiler by setting the CMake cache entry
+  CMAKE_serveur_COMPILER to the full path to the compiler, or to the compiler
+  name if it is in the PATH.
+
+
+CMake Error: Could not find cmake module file: CMakeserveurInformation.cmake
+CMake Error: CMAKE_serveur_COMPILER not set, after EnableLanguage
+-- Configuring incomplete, errors occurred!
+See also "/home/maxwell/Desktop/1A/Projet_dinte/Envoie_serveur/cmake-build-debug/CMakeFiles/CMakeOutput.log".
