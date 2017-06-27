@@ -15,11 +15,13 @@ int main(int argc, char *argv[])
     fd = open("/dev/ttyACM0", O_RDWR | O_NOCTTY);
     printf("fd opened as %i\n", fd);
 
-    char buf[64]={0};ssize_t n;
+    char *buf;ssize_t n;
     int i,j,k,compt;
     __uint32_t tik;
     char curent_weather[10],prevision_weather[10];
     do {
+        char* buf;
+        buf = malloc(32);
         CURL *curl;
         CURLcode res;
         /* In windows, this will init the winsock stuff */
@@ -32,60 +34,71 @@ int main(int argc, char *argv[])
 
             /* Receive string from Arduino */
             n = read(fd, buf, 64);
-            buf[n] = 0;
-            tik++;
-            printf("%s", curent_weather);
+            if (*buf != '\n') {
+                buf[n] = 0;
+                i = 0;
+                compt = 0;
+                j = 0;
+                k = 0;
 
-            compt = 0;j = 0; k = 0; i=0;
-            while(buf[i]!='\r'){
-                if (buf[i] == ' ') {
-                    compt++;
+                while (buf[i] != '\n') {
+                    if (buf[i] == ' ') {
+                        compt++;
+                    }
+                    switch (compt) {
+                        case 1:
+                            if (buf[i] != ' ') {
+                                curent_weather[j] = buf[i];
+                                j++;
+                            }
+                            break;
+                        case 2:
+                            if (buf[i] != ' ') {
+                                prevision_weather[k] = buf[i];
+                                k++;
+                            }
+                            break;
+                    }
+                    buf[i] = 0;
+                    i++;
                 }
-                switch (compt) {
-                    case 1:
-                        if(buf[i]!=' '){
-                            curent_weather[j] = buf[i];
-                            j++;
-                        }
-                        break;
-                    case 2:
-                        if(buf[i]!=' ') {
-                            prevision_weather[k] = buf[i];
-                            k++;
-                        }
-                        break;
-                }
-                buf[i]=0;
-                i++;
-            }
+                tik++;
 
-            printf("\n");printf("%d", tik);printf("%s", curent_weather);printf("%s", prevision_weather);printf("\n");
-
-            char* msg_json;
-            msg_json = malloc(1024);
-            sprintf(msg_json,"{\"timestamp\":%d,\"weather\":[{\"dfn\":0,\"weather\":\"%s\"},{\"dfn\":1,\"weather\":\"%s\"]}", tik, curent_weather, prevision_weather);
-            if (curl) {
-                /* Specify the ULR target */
-                curl_easy_setopt(curl, CURLOPT_URL, "https://limonade-equipe7.herokuapp.com/metrology");
-                /* Now specify the POST data */
-                curl_easy_setopt(curl, CURLOPT_POSTFIELDS, msg_json);
-                list = curl_slist_append(list, "content-Type:application/json");
-                curl_easy_setopt(curl, CURLOPT_HTTPHEADER, list);
-                /* Perform the request, res will get the return code */
-                res = curl_easy_perform(curl);
-                if (res != CURLE_OK) {
-                    printf("curl_easy_perform() failed: %s\n", curl_easy_strerror(res));
-                }
                 printf("\n");
-                free(msg_json);
-                curl_easy_cleanup(curl);
-            }
-            curl_global_cleanup();
+                printf("%d", tik);
+                printf("%s", curent_weather);
+                printf("%s", prevision_weather);
+                printf("\n");
 
-            for (i = 0; i < 10; i++) {
-                curent_weather[i] = 0;
-                prevision_weather[i] = 0;
+                char *msg_json;
+                msg_json = malloc(1024);
+                sprintf(msg_json,
+                        "{\"timestamp\":%d,\"weather\":[{\"dfn\":0,\"weather\":\"%s\"},{\"dfn\":1,\"weather\":\"%s\"}]}", tik,
+                        curent_weather, prevision_weather);
+                if (curl) {
+                    /* Specify the ULR target */
+                    curl_easy_setopt(curl, CURLOPT_URL, "https://limonade-equipe7.herokuapp.com/metrology");
+                    /* Now specify the POST data */
+                    curl_easy_setopt(curl, CURLOPT_POSTFIELDS, msg_json);
+                    list = curl_slist_append(list, "content-Type:application/json");
+                    curl_easy_setopt(curl, CURLOPT_HTTPHEADER, list);
+                    /* Perform the request, res will get the return code */
+                    res = curl_easy_perform(curl);
+                    if (res != CURLE_OK) {
+                        printf("curl_easy_perform() failed: %s\n", curl_easy_strerror(res));
+                    }
+                    printf("\n");
+                    free(msg_json);
+                    free(buf);
+                    curl_easy_cleanup(curl);
+                }
+                curl_global_cleanup();
+
+                for (i = 0; i < 10; i++) {
+                    curent_weather[i] = 0;
+                    prevision_weather[i] = 0;
+                }
             }
         }
-    } while (buf[n] != '0');
+    } while (buf[n]!='0');
 }

@@ -101,7 +101,7 @@ void setup() {
   tab_weather[1].weather=("cloudy");
   tab_weather[2].weather=("sunny");
   tab_weather[3].weather=("heatwave");
-  tab_weather[4].weather=("thunderstrom");
+  tab_weather[4].weather=("thunderstorm");
 }
 
 void loop() { // run over and over      
