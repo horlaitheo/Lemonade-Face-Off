@@ -5,7 +5,6 @@
  */
 package javafxapplication;
 
-import java.awt.Dimension;
 import javafx.scene.paint.*;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -145,31 +144,26 @@ public class JavaFXApplication extends Application {
         ArrayList<Joueur> joueur = new ArrayList();
         Map carte = Map.getInstance(0, 0, 0, 0, joueur, client);
         
-        // Récupère les dimensions de l'écran
-        Dimension dimension = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        int height = (int)dimension.getHeight();
-        int width  = (int)dimension.getWidth();
-        System.out.println("taille écran:");
-        System.out.println(height);
-        System.out.println(width);
-        
         //Create the StackPane
         StackPane holder = new StackPane();
         // Create the Canvas
-        Canvas canvas = new Canvas(width, height);
-        
+        Canvas canvas = new Canvas(carte.getLattitude(), carte.getLongitude());
+        // Set the width of the Canvas
+        canvas.setWidth(carte.getLat_span()*2);
+        // Set the height of the Canvas
+        canvas.setHeight(carte.getLong_span()*2);
 
         // Get the graphics context of the canvas
         GraphicsContext gc = canvas.getGraphicsContext2D();
         // création des stand et pub des joueurs
         for (int i=0; i<carte.getJoueur().size(); i++){
             for (int j=0; j<carte.getJoueur().get(i).getEmplacement().size(); j++){
-                float x =  ((carte.getJoueur().get(i).getEmplacement().get(j).getLongitude() + carte.getLong_span())  * height)/carte.getLong_span();
-                float y =  ((carte.getJoueur().get(i).getEmplacement().get(j).getLattitude() + carte.getLat_span()) * width)/carte.getLat_span();
-                float z =  (carte.getJoueur().get(i).getEmplacement().get(j).getInfluence() * width)/carte.getLat_span();
-                float z_bis =  (carte.getJoueur().get(i).getEmplacement().get(j).getInfluence() * height)/carte.getLong_span();
-                System.out.println( x+" "+y+" "+z+" "+z_bis);
-                gc.fillRect(x, y, z, z_bis);
+                float x =  carte.getJoueur().get(i).getEmplacement().get(j).getLongitude() + carte.getLong_span();
+                float y =  carte.getJoueur().get(i).getEmplacement().get(j).getLattitude() + carte.getLat_span();
+                float z =  carte.getJoueur().get(i).getEmplacement().get(j).getInfluence() ;
+                
+                System.out.println( x+" "+y+" "+z);
+                gc.fillRect(x, y, z, z);
             }
         }
         
@@ -197,6 +191,7 @@ public class JavaFXApplication extends Application {
         stage.setScene(scene);
         // Set the Title of the Stage
         stage.setTitle("Creation of a Canvas");
+        stage.setFullScreen(true);
         // Display the Stage
         stage.show();
     }
