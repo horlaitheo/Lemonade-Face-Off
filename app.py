@@ -14,30 +14,24 @@ postSales=[]
 nombre = ['toto','tata','titi']
 
 weather = []
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 
 @app.route("/reset", methods=["GET"])
-=======
 
-=======
- 
->>>>>>> 351dc22d134561bee1649ff9baeddd00e6ded2af
 @app.route("/GET/reset", methods=["GET"])
 def getReset():
 	global nombre
 	temp = random.choice(nombre)
 	return json.dumps(temp),200,{'Content-Type':'application/json'}
 
-<<<<<<< HEAD
-@app.route("/meteorology", methods=["GET"])
-=======
 
-
-
+@app.route("/metrology", methods=["GET"])
+def getMetrology():
+    tmp={"weather":"sunny"}
+    return json.dumps(tmp),200, {'Content-Type':'application/json'}
 
 @app.route("/GET/metrology", methods=["GET"])
->>>>>>> 351dc22d134561bee1649ff9baeddd00e6ded2af
+
 def getWeather():
 	tmp={"timestamp":1,"weather":"sunny", "test":{"key1":0.5,"key2":"[tao,toa,tia]"}}
 	return json.dumps(tmp),200,{'Content-Type':'application/json'}
@@ -50,7 +44,7 @@ def getmap():
 	#tmp={"map"{"region":"perpignan","ranking":["Kevin","adam"],"itemsByPlayer":{"kind":"shop","owner":"Jack336","location":coordinate{"latitude":0.6,"longitude":5.7},"influance":10.8},"PlayerInfo":{"jean"{"cash":3000.50,"sales":80,"profit":100.8,"drinksOffered":["name":"Mojito","price":5.80,"hasAlcohol":True,"isCold":True]}}}}
 	return json.dumps(tmp),200,{'Content-Type':'application/json'}
 
-	
+
 
 
 @app.route("/GET/ingredients", methods=["GET"])
@@ -64,7 +58,7 @@ def getIngredienst():
 def getMapPlayer():
 	# TODO
 #################################                   POST   						 #######################################################
- 
+
 	return json.dumps(),200,{'Content-Type':'application/json'}
 
 @app.route("/POST/quitter", methods=["POST"])
@@ -91,14 +85,9 @@ def postSales():
  	print(postSales)
 
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-@app.route("/idPost",methods=["POST"])
-=======
 
-=======
- 
->>>>>>> 351dc22d134561bee1649ff9baeddd00e6ded2af
+@app.route("/idPost",methods=["POST"])
+
 @app.route("/POST/idPost",methods=["POST"])
 def postId():
  	global  identifiant
@@ -108,15 +97,9 @@ def postId():
  	identifiant.append(tmp)
  	print(identifiant)
  	return json.dumps(identifiant),200,{'Content-Type':'application/json'}
-<<<<<<< HEAD
-<<<<<<< HEAD
 
 @app.route("/idIsValide",methods=["POST"])
-=======
 
-=======
- 
->>>>>>> 351dc22d134561bee1649ff9baeddd00e6ded2af
 @app.route("/POST/idIsValide",methods=["POST"])
 def postIdIsValide():
  	global  identifiant
@@ -129,11 +112,10 @@ def postIdIsValide():
 
  	print(identifiant)
 
-<<<<<<< HEAD
+
 @app.route("/meteorology", methods=["POST"])
-=======
+
 @app.route("/POST/meterology", methods=["POST"])
->>>>>>> 351dc22d134561bee1649ff9baeddd00e6ded2af
 def postWheather():
  	global weather
  	tmp = request.get_data()
@@ -147,13 +129,9 @@ def postAction():
 
 
 	return json.dumps(),200,{'Content-Type':'application/json'}
-<<<<<<< HEAD
 
 
->>>>>>> 838faca50c0e18c99deeb5ed382561c5c31265c9
-=======
- 		
->>>>>>> 351dc22d134561bee1649ff9baeddd00e6ded2af
+
 #@app.route("/idGet",methods=["GET"])
 #def idGet():
 #	return "test"

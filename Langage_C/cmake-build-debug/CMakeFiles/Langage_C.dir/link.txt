@@ -1,1 +1,0 @@
-/usr/bin/cc  -g   CMakeFiles/Langage_C.dir/main.c.o  -o Langage_C -lcurl 
