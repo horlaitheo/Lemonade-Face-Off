@@ -82,13 +82,13 @@ void affichage(){
   lcd.print(previous_weather); 
   lcd.setCursor(0,1);
   lcd.print("temp h ");
-  lcd.print(30000 + accl);
+  lcd.print(10000 + accl);
   lcd.print("ms");
 }
 
 void setup() {
   Serial.begin(9600);
-  Serial.println("Bonjour");
+  Serial.print(tik),Serial.print(" "),Serial.print(current_weather),Serial.print(" " ),Serial.println(previous_weather);
   lcd.begin(16, 2);              // start the library
   lcd.setCursor(0,0);
   lcd.print("Bonjour"); // print a simple message*/
@@ -105,7 +105,7 @@ void setup() {
 }
 
 void loop() { // run over and over      
-  if (millis()-horloge >= accl + 30000){
+  if (millis()-horloge >= accl + 10000){
     tik = tik +1;
     Serial.print(tik),Serial.print(" "),Serial.print(current_weather),Serial.print(" " ),Serial.println(previous_weather);
     horloge = millis();
