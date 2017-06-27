@@ -4,6 +4,7 @@
 
 CREATE TYPE D_types AS ENUM ('ad','stand');
 
+CREATE TYPE D_weather AS ENUM ('cloudy','sunny','rainny','thunderstorm','heatwave','');
 
 ------------------------------------------------------------
 -- Table: Ingredient
@@ -58,13 +59,15 @@ CREATE TABLE Map_Item(
 -- Table: Map
 ------------------------------------------------------------
 CREATE TABLE Map(
-	map_id             SERIAL NOT NULL ,
-	map_day_nb		   INT   ,
-	map_time           BIGINT   ,
-	map_longitude      FLOAT   ,
-	map_lattitude      FLOAT   ,
-	map_longitude_span FLOAT   ,
-	map_lattitude_span FLOAT   ,
+	map_id             		SERIAL NOT NULL ,
+	map_day_nb		   		INT   ,
+	map_time           		BIGINT   ,
+	map_longitude      		FLOAT   ,
+	map_lattitude      		FLOAT   ,
+	map_longitude_span 		FLOAT   ,
+	map_lattitude_span 		FLOAT   ,
+	map_prevision_weather 	D_weather,
+	map_current_weather 	D_weather,
 	CONSTRAINT prk_constraint_Map PRIMARY KEY (map_id)
 );
 
@@ -127,14 +130,14 @@ CREATE TABLE Access(
 );
 
 
-ALTER TABLE Map_Item ADD CONSTRAINT FK_Map_Item_pla_name FOREIGN KEY (mit_pla_name) REFERENCES Player(pla_name);
+ALTER TABLE Map_Item ADD CONSTRAINT FK_Map_Item_pla_name FOREIGN KEY (mit_pla_name) REFERENCES Player(pla_name) ON DELETE CASCADE ON UPDATE CASCADE;
 ALTER TABLE Map_Item ADD CONSTRAINT FK_Map_Item_map_id FOREIGN KEY (mit_map_id) REFERENCES Map(map_id);
 ALTER TABLE Preference ADD CONSTRAINT FK_Preference_map_id FOREIGN KEY (pre_map_id) REFERENCES Map(map_id);
 ALTER TABLE Compose ADD CONSTRAINT FK_Compose_rcp_name FOREIGN KEY (com_rcp_name) REFERENCES Recipe(rcp_name);
 ALTER TABLE Compose ADD CONSTRAINT FK_Compose_ing_name FOREIGN KEY (com_ing_name) REFERENCES Ingredient(ing_name);
 ALTER TABLE Access ADD CONSTRAINT FK_Access_rcp_name FOREIGN KEY (acc_rcp_name) REFERENCES Recipe(rcp_name);
-ALTER TABLE Access ADD CONSTRAINT FK_Access_pla_name FOREIGN KEY (acc_pla_name) REFERENCES Player(pla_name);
-ALTER TABLE Sale ADD CONSTRAINT FK_Sale_pla_name FOREIGN KEY (sal_pla_name) REFERENCES Player(pla_name);
+ALTER TABLE Access ADD CONSTRAINT FK_Access_pla_name FOREIGN KEY (acc_pla_name) REFERENCES Player(pla_name) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE Sale ADD CONSTRAINT FK_Sale_pla_name FOREIGN KEY (sal_pla_name) REFERENCES Player(pla_name) ON DELETE CASCADE ON UPDATE CASCADE;
 ALTER TABLE Sale ADD CONSTRAINT FK_Sale_rcp_name FOREIGN KEY (sal_rcp_name) REFERENCES Recipe(rcp_name);
-ALTER TABLE Production ADD CONSTRAINT FK_Production_pla_name FOREIGN KEY (pro_pla_name) REFERENCES Player(pla_name);
+ALTER TABLE Production ADD CONSTRAINT FK_Production_pla_name FOREIGN KEY (pro_pla_name) REFERENCES Player(pla_name) ON DELETE CASCADE ON UPDATE CASCADE;
 ALTER TABLE Production ADD CONSTRAINT FL_Production_rcp_name FOREIGN KEY (pro_rcp_name) REFERENCES Recipe(rcp_name);

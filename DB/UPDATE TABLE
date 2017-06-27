@@ -17,5 +17,3 @@ WHERE pla_name = @VAR_NAME;
 UPDATE ingredient
 SET ing_current_cost = @VAR_COST
 WHERE ing_name = @VAR_ING;
-
---
