@@ -3,27 +3,41 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package projet_inte;
+package javafxapplication;
 
-import Graph.GraphSwing;
+import javafx.scene.paint.*;
 import java.util.ArrayList;
-import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Paint;
+import javafx.stage.Stage;
+import projet_inte.Client;
+import projet_inte.Communication;
+import projet_inte.Ingredient;
+import projet_inte.Joueur;
+import projet_inte.Map;
+import projet_inte.Prod;
+import projet_inte.Projet_inte;
+import projet_inte.Recette;
 
 /**
  *
  * @author Théo
  */
-public class Projet_inte {
-
+public class JavaFXApplication extends Application {
+    
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         /*        
-        *   SETUP 
+        *   SETUP
         */
         
         /* ingrédient limonade */
@@ -49,7 +63,7 @@ public class Projet_inte {
         ArrayList<Client> client = new ArrayList();
         ArrayList<Joueur> joueur = new ArrayList();
         
-        Map carte = Map.getInstance(0, 0, 10, 10, joueur, client);
+        Map carte = Map.getInstance(0, 0, 50, 50, joueur, client);
         
         ArrayList<Recette> recette = new ArrayList();
         recette.add(limonade);
@@ -80,8 +94,8 @@ public class Projet_inte {
         /* Affichage des positions des stands des joueurs */
         System.out.println("Affichage des positions des joueurs");
         for (int i=0; i<jou.size(); i++){
-            System.out.println(jou.get(i).getEmplacement().get(0).lattitude);
-            System.out.println(jou.get(i).getEmplacement().get(0).longitude);
+            System.out.println(jou.get(i).getEmplacement().get(0).getLattitude());
+            System.out.println(jou.get(i).getEmplacement().get(0).getLongitude());
         }
         System.out.println();
         
@@ -116,7 +130,70 @@ public class Projet_inte {
         }
         System.out.println();
         
-        Application.launch(GraphSwing.class, args);
+        launch(args);
+    }
+    
+    /**
+     * 
+     * @param stage 
+     */
+    @Override
+    public void start(Stage stage) {
+        
+        ArrayList<Client> client = new ArrayList();
+        ArrayList<Joueur> joueur = new ArrayList();
+        Map carte = Map.getInstance(0, 0, 0, 0, joueur, client);
+        
+        //Create the StackPane
+        StackPane holder = new StackPane();
+        // Create the Canvas
+        Canvas canvas = new Canvas(carte.getLattitude(), carte.getLongitude());
+        // Set the width of the Canvas
+        canvas.setWidth(carte.getLat_span()*2);
+        // Set the height of the Canvas
+        canvas.setHeight(carte.getLong_span()*2);
+
+        // Get the graphics context of the canvas
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+        // création des stand et pub des joueurs
+        for (int i=0; i<carte.getJoueur().size(); i++){
+            for (int j=0; j<carte.getJoueur().get(i).getEmplacement().size(); j++){
+                float x =  carte.getJoueur().get(i).getEmplacement().get(j).getLongitude() + carte.getLong_span();
+                float y =  carte.getJoueur().get(i).getEmplacement().get(j).getLattitude() + carte.getLat_span();
+                float z =  carte.getJoueur().get(i).getEmplacement().get(j).getInfluence() ;
+                
+                System.out.println( x+" "+y+" "+z);
+                gc.fillRect(x, y, z, z);
+            }
+        }
+        
+        for (int i=0; i<carte.getClient().size(); i++){
+            float x =  carte.getClient().get(i).getLongitude() + carte.getLong_span();
+            float y =  carte.getClient().get(i).getLattitude() + carte.getLat_span();
+            
+            gc.setFill(Color.RED);
+            gc.fillRect(x, y, 2, 2);
+                
+        }
+        
+        // Create the Pane
+        Pane root = new Pane();
+        
+        // Add the Canvas to the Pane and the holder
+        holder.getChildren().add(canvas);
+        root.getChildren().add(holder);
+        
+        holder.setStyle("-fx-background-color: green");
+        
+        // Create the Scene
+        Scene scene = new Scene(root);
+        // Add the Scene to the Stage
+        stage.setScene(scene);
+        // Set the Title of the Stage
+        stage.setTitle("Creation of a Canvas");
+        stage.setFullScreen(true);
+        // Display the Stage
+        stage.show();
     }
     
 }
