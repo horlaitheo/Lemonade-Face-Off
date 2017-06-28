@@ -27,7 +27,7 @@ SELECT SUM (sal_qty)
 --PROFIT
 SELECT
 	--GAIN
-	(SELECT SUM (sal_qty * sal_price) 
+	(SELECT SUM (sal_qty * sal_price) AS profit
 	FROM sale
 	INNER JOIN player ON player.pla_name = sale.sal_pla_name
 	WHERE sal_day_nb = @VAR_DAY - 1
@@ -35,7 +35,7 @@ SELECT
 	)
 	-
 	--DEPENSE
-	(SELECT SUM (pro_qty * pro_cost_at_that_time)
+	(SELECT SUM (pro_qty * pro_cost_at_that_time) AS cost
 	FROM production
 	INNER JOIN player ON player.pla_name = production.pro_pla_name
 	WHERE pro_day_nb = @VAR_DAY - 1

@@ -88,7 +88,6 @@ void affichage(){
 
 void setup() {
   Serial.begin(9600);
-  Serial.print(tik),Serial.print(" "),Serial.print(current_weather),Serial.print(" " ),Serial.println(previous_weather);
   lcd.begin(16, 2);              // start the library
   lcd.setCursor(0,0);
   lcd.print("Bonjour"); // print a simple message*/
@@ -101,7 +100,7 @@ void setup() {
   tab_weather[1].weather=("cloudy");
   tab_weather[2].weather=("sunny");
   tab_weather[3].weather=("heatwave");
-  tab_weather[4].weather=("thunderstrom");
+  tab_weather[4].weather=("thunderstorm");
 }
 
 void loop() { // run over and over      
