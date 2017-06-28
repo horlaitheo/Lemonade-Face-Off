@@ -23,7 +23,7 @@ import projet_inte.Ingredient;
 import projet_inte.Joueur;
 import projet_inte.Map;
 import projet_inte.Prod;
-import projet_inte.Projet_inte;
+import projet_inte.*;
 import projet_inte.Recette;
 
 /**
@@ -40,40 +40,18 @@ public class JavaFXApplication extends Application {
         *   SETUP
         */
         
-        /* ingrédient limonade */
-        Ingredient cit = new Ingredient("citron", (float) 0.20);
-        Ingredient suc = new Ingredient("sucre", (float) 0.20);
-        Ingredient gla = new Ingredient("glace", (float) 0.02);
-        Ingredient eau = new Ingredient("eau", (float) 0);
-        
-        /* Recette de la limonade */
-        ArrayList<Ingredient> composition = new ArrayList();
-        composition.add(cit);
-        composition.add(suc);
-        composition.add(gla);
-        composition.add(eau);
-        composition.add(eau);
-        
-        Recette limonade = new Recette("limonade", (float)0, (float)0, composition);
-        
-        /* Création de la prod */
-        Prod prod = new Prod("limonade", 40, (float)1.50);
-                
+       
         /* Création de la map */
         ArrayList<Client> client = new ArrayList();
         ArrayList<Joueur> joueur = new ArrayList();
         
-        Map carte = Map.getInstance(0, 0, 50, 50, joueur, client);
+        Map carte = Map.getInstance(double longitude, double lattitude, double long_span, double lat_span, ArrayList<Joueur> joueur);
         
-        ArrayList<Recette> recette = new ArrayList();
-        recette.add(limonade);
-        ArrayList<Prod> production = new ArrayList();
-        production.add(prod);
         
-        carte.createJoueur("player 1", production, recette);
-        carte.tailleMap();
-        carte.createJoueur("player 2", production, recette);
-        carte.tailleMap();
+       
+      
+        
+      
         carte.NombreClient();
         
         Communication com = new Communication();
@@ -102,10 +80,7 @@ public class JavaFXApplication extends Application {
         limonade.CalculCout();
         
         
-        /* Création de la prod */
-        for (int i=0; i<jou.size(); i++){
-            jou.get(i).CalculProd();
-        }
+      
         
         /* Affichage du budget */
         System.out.println("Affichage des budget: ");
@@ -142,7 +117,7 @@ public class JavaFXApplication extends Application {
         
         ArrayList<Client> client = new ArrayList();
         ArrayList<Joueur> joueur = new ArrayList();
-        Map carte = Map.getInstance(0, 0, 0, 0, joueur, client);
+        Map carte = Map.getInstance(0, 0, 0, 0);
         
         //Create the StackPane
         StackPane holder = new StackPane();
@@ -172,7 +147,8 @@ public class JavaFXApplication extends Application {
             float y =  carte.getClient().get(i).getLattitude() + carte.getLat_span();
             
             gc.setFill(Color.RED);
-            gc.fillRect(x, y, 2, 2);
+            gc.fillRect(x, y, 5, 5);
+            
                 
         }
         
@@ -194,6 +170,10 @@ public class JavaFXApplication extends Application {
         stage.setFullScreen(true);
         // Display the Stage
         stage.show();
+    
+          
     }
     
-}
+    }
+    
+
