@@ -24,6 +24,7 @@ CREATE TABLE Ingredient(
 CREATE TABLE Recipe(
 	rcp_name    VARCHAR (50) NOT NULL ,
 	rcp_is_cold BOOL   ,
+	rcp_has_alcohol  BOOL	,
 	CONSTRAINT prk_constraint_Recipe PRIMARY KEY (rcp_name)
 );
 
