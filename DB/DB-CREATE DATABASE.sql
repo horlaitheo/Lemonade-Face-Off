@@ -24,6 +24,7 @@ CREATE TABLE Ingredient(
 CREATE TABLE Recipe(
 	rcp_name    VARCHAR (50) NOT NULL ,
 	rcp_is_cold BOOL   ,
+	rcp_has_alcohol  BOOL	,
 	CONSTRAINT prk_constraint_Recipe PRIMARY KEY (rcp_name)
 );
 
@@ -48,7 +49,7 @@ CREATE TABLE Map_Item(
 	mit_type      D_TYPES ,
 	mit_influence  FLOAT   ,
 	mit_longitude FLOAT   ,
-	mit_lattitude FLOAT   ,
+	mit_latitude FLOAT   ,
 	mit_pla_name      VARCHAR (50)  ,
 	mit_map_id        INT   ,
 	CONSTRAINT prk_constraint_Map_Item PRIMARY KEY (mit_id)
@@ -63,9 +64,9 @@ CREATE TABLE Map(
 	map_day_nb		   		INT   ,
 	map_time           		BIGINT   ,
 	map_longitude      		FLOAT   ,
-	map_lattitude      		FLOAT   ,
+	map_latitude      		FLOAT   ,
 	map_longitude_span 		FLOAT   ,
-	map_lattitude_span 		FLOAT   ,
+	map_latitude_span 		FLOAT   ,
 	map_prevision_weather 	D_weather,
 	map_current_weather 	D_weather,
 	CONSTRAINT prk_constraint_Map PRIMARY KEY (map_id)

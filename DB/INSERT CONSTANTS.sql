@@ -7,7 +7,7 @@ INSERT INTO ingredient VALUES
 	('glace', 0.02, FALSE, TRUE),
 	('sucre', 0.2, FALSE, FALSE),
 	('eau petillante', 0.2, FALSE, FALSE),
-	('rhum', 1, FALSE, FALSE),
+	('rhum', 1, TRUE, FALSE),
 	('menthe', 0.3, FALSE, FALSE),
 	('epice vin chaud', 0.1, FALSE, FALSE),
 	('vin', 1, TRUE, FALSE),
@@ -15,11 +15,11 @@ INSERT INTO ingredient VALUES
 	('grains de café', 0.3, FALSE, FALSE);
 
 INSERT INTO recipe VALUES
-	('limonade', TRUE),
-	('mojito', TRUE),
-	('vin chaud', FALSE),
-	('café', FALSE),
-	('thé', FALSE);
+	('limonade', TRUE, FALSE),
+	('mojito', TRUE, TRUE),
+	('vin chaud', FALSE, TRUE),
+	('café', FALSE, FALSE),
+	('thé', FALSE, FALSE);
 
 INSERT INTO compose VALUES
 	(1,'limonade','citron'),
