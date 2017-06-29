@@ -13,10 +13,13 @@ import java.util.Random;
  * @author Théo
  */
 public class Map {
-    private double longitude;
-    private double lattitude;
+    private double longitude ;
+    private double lattitude ;
     private double long_span;
     private double lat_span;
+    private String current_weather;
+    private String next_weather;
+
     private ArrayList<Joueur> joueur;
     private ArrayList<Client> client;
     private static Map INSTANCE = null;
@@ -56,7 +59,21 @@ public class Map {
         return INSTANCE;
     }
 
+    public String getCurrent_weather() {
+        return current_weather;
+    }
+
+    public void setCurrent_weather(String current_weather) {
+        this.current_weather = current_weather;
+    }
     
+    public void setNext_weather(String next_weather) {
+        this.next_weather = next_weather;
+    }
+
+    public String getNext_weather() {
+        return next_weather;
+    }
     /**
      * 
      * @return la longitude de la map 
@@ -169,29 +186,37 @@ public class Map {
     
     public void NombreClient(){
         /* les messures de la map */
-        int min_long = (int) (this.longitude-this.long_span);
-        int max_long = (int) (this.longitude+this.long_span);
-        int min_lat = (int) (this.lattitude-this.lat_span);
-        int max_lat = (int) (this.lattitude+this.lat_span);
+        int min_long = 50;
+        int max_long = 950;
+        int min_lat = 50;
+        int max_lat = 950;
+        System.out.println(max_lat+""+min_lat);
         
         /* si il y a trop de client*/
-        if (this.client.size() > this.joueur.size()*50){
+        if (this.client.size() > this.joueur.size()*100){
             /* suppression des clients en trop */
-            for(int i=this.client.size(); i>this.joueur.size()*50; i--){
+            for(int i=this.client.size(); i>this.joueur.size()*100; i--){
                this.client.get(i).setLattitude(0);
                this.client.get(i).setLongitude(0);
                this.client.get(i).setJoueur(null);
                this.client.remove(i);
             }
            /* si il a pas assez de client */
-        }else if (this.client.size() < this.joueur.size()*50){
+        }else if (this.client.size() < this.joueur.size()*100){
             /* ajout de nouveau client */
-            for(int i=0; this.client.size() < this.joueur.size()*50; i++){
+            for(int i=0; this.client.size() < this.joueur.size()*100; i++){
                Random rand = new Random();
-               float longi = rand.nextInt(max_long-min_long + 1)+min_long;
-               float latti = rand.nextInt(max_lat-min_lat + 1)+min_lat;
-               Client client = new Client(longi, latti, joueur);
-               this.client.add(client);
+               double longi = Math.random()*1000/*rand.nextInt(max_long-min_long + 1)+min_long*/;
+               double latti = Math.random()*1000/*rand.nextInt(max_lat-min_lat + 1)+min_lat*/;
+               
+               for(int t=0; t < this.joueur.size();t++){
+                 
+                   if((longi!=this.joueur.get(t).getItems().get(0).getLongitude())&&(latti!=this.joueur.get(t).getItems().get(0).getLatitude())){
+                       if((longi<980 && longi>20)&&(latti<980 && latti>20)){
+                        Client client = new Client(longi, latti, joueur);
+                         this.client.add(client);}}
+               
+                   }
             }
        }
     }
@@ -219,6 +244,20 @@ public class Map {
         
         
                
+    }
+    public void mapload(){
+       
+    
+    
+    
+    
+    
+    }
+    public void movement(){
+    for(int i=0;i<this.client.size();i++){
+        this.client.get(i).chooseCloser(this.joueur);
+        
+    }
     }
     
     public void LancerVente(ArrayList<String> weather){

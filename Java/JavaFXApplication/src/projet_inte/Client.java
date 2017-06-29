@@ -14,6 +14,10 @@ import java.util.ArrayList;
 public class Client {
     private boolean already = false ;
 
+    private double longitude;
+    private double latitude;
+    private ArrayList<Joueur> joueur;
+    
     public void setAlready(boolean already) {
         this.already = already;
     }
@@ -21,9 +25,6 @@ public class Client {
     public boolean isAlready() {
         return already;
     }
-    private double longitude;
-    private double latitude;
-    private ArrayList<Joueur> joueur;
     
     /**
      * Constructeur de Client
@@ -70,8 +71,30 @@ public class Client {
     }
     
     public void chooseCloser(ArrayList<Joueur> joueur){
-     //   joueur.get
-        
+       double lon=600.0;
+       double lat= 600.0;
+       double lonkept =0.0;
+       double latkept =0.0;
+       if(joueur!= null){
+        for(int i =0;i<joueur.size();i++){
+            for(int j =0;j<joueur.get(i).getItems().size();j++){
+                
+            if((joueur.get(i).getItems().get(j).getKind()).compareTo("stand")==0 ){
+                
+            if((joueur.get(i).getItems().get(j).getLongitude()-longitude)<lon || (longitude-joueur.get(i).getItems().get(j).getLongitude())<lon){
+                lonkept=joueur.get(i).getItems().get(j).getLongitude();
+                
+            }
+              if((joueur.get(i).getItems().get(j).getLatitude()-latitude)<lon || (latitude-joueur.get(i).getItems().get(j).getLatitude())<lon){
+                latkept=joueur.get(i).getItems().get(j).getLatitude();
+                
+                             }        
+                        }
+                    }
+             }
+       }
+        if(lonkept!=0 && latkept!=0){
+        Move(lonkept,latkept);}
     }
     
     /**
@@ -90,25 +113,24 @@ public class Client {
         this.latitude = lattitude;
     }
     
-    public void Target(ArrayList<Emplacement> emplacement){
-        //si le client c'est que dans une seule zone d'influence
-      
-    }
+   
     public void buy(){
         if(!already){
         for(int i=0; i<joueur.size();i++){
-        if((this.longitude >joueur.get(i).getItems().get(i).getLongitude()+1 && this.longitude< joueur.get(i).getItems().get(i).getLongitude()-1) && (this.latitude>joueur.get(i).getItems().get(i).getLatitude()+1 && this.latitude<joueur.get(i).getItems().get(i).getLatitude()-1)){
-         
+            for(int j=0;j<joueur.get(i).getItems().size();j++){
+        if((this.longitude >joueur.get(i).getItems().get(j).getLongitude()+1 && this.longitude< joueur.get(i).getItems().get(i).getLongitude()-1) && (this.latitude>joueur.get(i).getItems().get(i).getLatitude()+1 && this.latitude<joueur.get(i).getItems().get(i).getLatitude()-1))
+        {
+           
             joueur.get(i).setQuantity(1);
             
             already=true;
-            break;
-                    
-                }
-      }
+            break;     
+                
+            }
+          }
         }
+      }
     }
-    
     public void Move(double lo,double la){
        
         while((this.longitude >lo+1 && this.longitude< lo-1) && (this.latitude>la+1 && this.latitude<la-1)){
