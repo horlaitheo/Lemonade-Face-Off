@@ -63,6 +63,45 @@ public class Communication {
 	
 		}
 	
+        
+        
+        
+        
+        
+        
+        public int GetDay() throws Exception {
+
+			String url = "http://limonade-equipe7.herokuapp.com/day";    	 /** url utilisé plus loin pour les requêtes prend le sting url */
+			URL obj = new URL(url);                  						 /** Déclaration d'une nouvelle instance de la classe importé URL */
+			HttpURLConnection con = (HttpURLConnection) obj.openConnection();/** */
+			con.setRequestMethod("GET");									 /** Utilisation de l'option (Passe en 'mode' GET) */
+			con.setRequestProperty("User-Agent", USER_AGENT);				 /** Ajoute un header à la requête */
+			int responseCode = con.getResponseCode();						 /**Déclare un int et Récupère la reponse du Get envoyé par le serveur et la stock dans une varibale*/
+			
+			System.out.println("\nSending 'GET' request to URL : " + url);	/** Affiche la requête envoyé  */
+			System.out.println("Response Code : " + responseCode);			/**Affiche la réponse à la requête stocké dans la variable 'responseCode'*/
+			
+			
+			BufferedReader in = new BufferedReader(
+			        new InputStreamReader(con.getInputStream()));			/** Déclaration d'un nouvelle objet 'in' de type BuffereReader qui va contenir le flux de données entrant   */ 
+			
+			String inputLine;												/** Déclare un string pour stocker le conten lu du bufferReader */ 
+			StringBuffer response = new StringBuffer();
+			
+			while ((inputLine = in.readLine()) != null) { 
+				response.append(inputLine);
+			}																/** Boucle qui écrit dans response tant que inputLine (qui contient in.readLine) n'est pas  NULL */ 						
+			in.close();
+                        
+                        int rep = Integer.parseInt(response.toString());
+			
+			System.out.println(rep);						/** Affiche le resultat en string de 'response'*/
+	
+	return rep;
+	
+	
+		}
+	
 	/**
 	 * Définitionn de la fonction Getmap()
 	 * @throws Exception capture les exeptions qui peuvent apparaitre et envoie un message qui est directement pris de la classe mere

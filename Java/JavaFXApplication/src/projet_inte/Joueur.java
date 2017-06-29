@@ -13,11 +13,8 @@ import java.util.Random;
  * @author Théo
  */
 public class Joueur {
-    private int quantity;
-
-    public void setQuantity(int quantity) {
-        this.quantity = this.quantity+quantity;
-    }
+   private int quantity=0;
+   
     private String nom;
     private double budget;
     protected ArrayList<MapItems> items;
@@ -41,8 +38,16 @@ public class Joueur {
         this.recette = recette;
        
     }  
+    public void resetQuantity(int quantity){
+    this.quantity=quantity;} 
     
-    
+    public void setQuantity(int quantity) {
+   this.quantity = this.quantity+quantity;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
     
     /**
      * 

@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * @author Théo
  */
 public class Client {
-    private boolean already = false ;
+    private boolean already = true ;
 
     private double longitude;
     private double latitude;
@@ -115,21 +115,29 @@ public class Client {
     
    
     public void buy(){
-        if(!already){
-        for(int i=0; i<joueur.size();i++){
-            for(int j=0;j<joueur.get(i).getItems().size();j++){
-        if((this.longitude >joueur.get(i).getItems().get(j).getLongitude()+1 && this.longitude< joueur.get(i).getItems().get(i).getLongitude()-1) && (this.latitude>joueur.get(i).getItems().get(i).getLatitude()+1 && this.latitude<joueur.get(i).getItems().get(i).getLatitude()-1))
-        {
-           
-            joueur.get(i).setQuantity(1);
+        double closeDistance = Math.sqrt(Math.pow(joueur.get(0).getItems().get(0).getLongitude()-this.longitude, 2.0)+Math.pow(joueur.get(0).getItems().get(0).getLatitude()-this.latitude, 2.0));
+        int target=0; 
+        if(this.already==true){
+        for(int i=1;i<joueur.size();i++){
+            for(int j=0; j<joueur.get(i).getItems().size();j++){
             
-            already=true;
-            break;     
-                
+            double distance =Math.sqrt(Math.pow(joueur.get(i).getItems().get(j).getLongitude()-this.longitude, 2.0)+Math.pow(joueur.get(i).getItems().get(j).getLatitude()-this.latitude, 2.0)) ;
+            if(distance < closeDistance){
+            closeDistance =distance;
+            target =j;
+            
+            
             }
-          }
+            
+            }
+                
+                
+                
+                }
+        
+        this.joueur.get(target).setQuantity(1);
+        this.already=false;
         }
-      }
     }
     public void Move(double lo,double la){
        

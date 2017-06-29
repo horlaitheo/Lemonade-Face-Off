@@ -37,7 +37,9 @@ public class Fxview extends Application {
         JSONObject composantCarte= new JSONObject();
         
         int heure;
+         int current;
         JSONObject weather= new JSONObject();
+         Map carte;
        
        public static void main(String[] args) {
         launch(args);
@@ -48,7 +50,7 @@ public class Fxview extends Application {
                         weather = com.GetWeather();
                         composantCarte = com.Getmap();
                         System.out.println(weather);
-                        int heure;
+                       
                         String current_weather;
                         String next_weather;
                         
@@ -80,7 +82,8 @@ public class Fxview extends Application {
                       carte.NombreClient();
         
         
-        
+                         heure=com.GetDay();
+                         current=heure;
 
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
@@ -92,10 +95,51 @@ public class Fxview extends Application {
                     try {
                         Fxview view = new Fxview();
                         
+                        System.out.println(carte.getLat_span());
+                         weather=com.GetWeather();
                         
+                        
+                        heure=com.GetDay();
+                         System.out.println(com.GetDay());
+                         if(heure!=current){
+                             current=heure;
+                         for(int i=0;i<carte.getJoueur().size();i++){
+                             com.sendPost(carte.getJoueur().get(i).getNom() ,"limonade" ,carte.getJoueur().get(i).getQuantity());
+                             System.out.println("ENVOIE DU SALES"+carte.getJoueur().get(i).getNom() +"limonade" +carte.getJoueur().get(i).getQuantity());
+                             carte.getJoueur().get(i).resetQuantity(0);
+                             for(int j=0;j< carte.getClient().size();j++){
+                             if(carte.getClient().get(j).isAlready()==false){
+                             carte.getClient().get(j).setAlready(true);
+                             carte.getClient().clear();
+                             
+                             }
+                             }
+                         }
+                         composantCarte = com.Getmap();
+                          for (int i = 0; i < composantCarte.getJSONObject("map").getJSONArray("ranking").length(); i++) {
+                            for(int j =0; j <composantCarte.getJSONObject("map").getJSONObject("itemsByPlayer").getJSONArray(composantCarte.getJSONObject("map").getJSONArray("ranking").getString(i)).length();j++){
 
+                               Items.add(new MapItems(composantCarte.getJSONObject("map").getJSONObject("itemsByPlayer").getJSONArray(composantCarte.getJSONObject("map").getJSONArray("ranking").getString(i)).getJSONObject(j).getString("kind"),composantCarte.getJSONObject("map").getJSONObject("itemsByPlayer").getJSONArray(composantCarte.getJSONObject("map").getJSONArray("ranking").getString(i)).getJSONObject(j).getString("owner"),composantCarte.getJSONObject("map").getJSONObject("itemsByPlayer").getJSONArray(composantCarte.getJSONObject("map").getJSONArray("ranking").getString(i)).getJSONObject(j).getJSONObject("location").getDouble("longitude"),composantCarte.getJSONObject("map").getJSONObject("itemsByPlayer").getJSONArray(composantCarte.getJSONObject("map").getJSONArray("ranking").getString(i)).getJSONObject(j).getJSONObject("location").getDouble("latitude"),composantCarte.getJSONObject("map").getJSONObject("itemsByPlayer").getJSONArray(composantCarte.getJSONObject("map").getJSONArray("ranking").getString(i)).getJSONObject(j).getDouble("influence")));
 
+                               //if(composantCarte.getJSONObject("map").getJSONObject("drinksByPlayer").getJSONArray(composantCarte.getJSONObject("map").getJSONArray("ranking").getString(i))!=null){
+                                        recette.add(new Recette( composantCarte.getJSONObject("map").getJSONObject("drinksByPlayer").getJSONArray(composantCarte.getJSONObject("map").getJSONArray("ranking").getString(i)).getJSONObject(j).getString("name")  ,  composantCarte.getJSONObject("map").getJSONObject("drinksByPlayer").getJSONArray(composantCarte.getJSONObject("map").getJSONArray("ranking").getString(i)).getJSONObject(j).getDouble("price")  ) );
+                                 //}
+                                         }
+                            joueur.add(new Joueur(composantCarte.getJSONObject("map").getJSONArray("ranking").getString(i),composantCarte.getJSONObject("map").getJSONObject("playerInfo").getJSONObject(composantCarte.getJSONObject("map").getJSONArray("ranking").getString(i)).getDouble("cash"),recette,Items));
+                       }
+                      
+                       carte.mapload(composantCarte.getJSONObject("map").getJSONObject("region").getJSONObject("center").getDouble("longitude"),composantCarte.getJSONObject("map").getJSONObject("region").getJSONObject("center").getDouble("latitude"),composantCarte.getJSONObject("map").getJSONObject("region").getJSONObject("span").getDouble("longitudeSpan"),composantCarte.getJSONObject("map").getJSONObject("region").getJSONObject("span").getDouble("latitudeSpan"),joueur);
+                      // System.out.println(weather.getInt("timestamp"));
+                        carte.setCurrent_weather(weather.getJSONArray("weather").getJSONObject(0).getString("weather"));
+                        carte.setCurrent_weather(weather.getJSONArray("weather").getJSONObject(1).getString("weather"));
+                       // System.out.println(weather.getJSONArray("weather").getJSONObject(0).getString("weather"));
+                        //System.out.println(weather.getJSONArray("weather").getJSONObject(1).getString("weather"));
+                      carte.NombreClient();
+                         
+                         }
+                         
 
+/*
 
                         StackPane root = new StackPane();
 
@@ -128,13 +172,13 @@ public class Fxview extends Application {
 
                       //  System.out.println(weather.getJSONArray("weather").getJSONObject(0).getString("weather"));
 
-                        root.getChildren().addAll(/*canvas,*/canvasB);
+                        root.getChildren().addAll(canvasB);
 
 
 
                         primaryStage.setTitle("visuel");
                         primaryStage.setScene(new Scene(root));
-                        primaryStage.show();
+                        primaryStage.show();*/
                         carte.movement();
                     } catch (Exception ex) {
                         Logger.getLogger(Fxview.class.getName()).log(Level.SEVERE, null, ex);

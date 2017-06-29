@@ -14,7 +14,7 @@ import java.util.Random;
  */
 public class Map {
     private double longitude ;
-    private double lattitude ;
+    private double latitude ;
     private double long_span;
     private double lat_span;
     private String current_weather;
@@ -33,15 +33,15 @@ public class Map {
      * @param joueur 
      * @param client 
      */
-   public Map(double longitude, double lattitude, double long_span, double lat_span, ArrayList<Joueur> joueur) {
+   public Map(double longitude, double latitude, double long_span, double lat_span, ArrayList<Joueur> joueur) {
         this.longitude = longitude;
-        this.lattitude = lattitude;
+        this.latitude = latitude;
         this.long_span = long_span;
         this.lat_span = lat_span;
         this.joueur = joueur;
         this.client =  new ArrayList();
     }
-    
+   
     /**
      * Creer une instance de map
      * @param longitude
@@ -52,9 +52,9 @@ public class Map {
      * @param client
      * @return l'instance de la map
      */
-    public static Map getInstance(double longitude, double lattitude, double long_span, double lat_span, ArrayList<Joueur> joueur){
+    public static Map getInstance(double longitude, double latitude, double long_span, double lat_span, ArrayList<Joueur> joueur){
         if (INSTANCE == null){
-            INSTANCE = new Map( longitude, lattitude, long_span, lat_span, joueur);
+            INSTANCE = new Map( longitude, latitude, long_span, lat_span, joueur);
         }
         return INSTANCE;
     }
@@ -95,7 +95,7 @@ public class Map {
      * @return la lattitude de la map
      */
     public double getLattitude() {
-        return lattitude;
+        return latitude;
     }
     
     /**
@@ -103,7 +103,7 @@ public class Map {
      * @param lattitude 
      */
     public void setLattitude(double lattitude) {
-        this.lattitude = lattitude;
+        this.latitude = lattitude;
     }
     
     /**
@@ -238,8 +238,8 @@ public class Map {
         /* les messures de la map */
         int min_long = (int) (this.longitude-this.long_span)+40;
         int max_long = (int) (this.longitude+this.long_span)-40;
-        int min_lat = (int) (this.lattitude-this.lat_span)-40;
-        int max_lat = (int) (this.lattitude+this.lat_span)+40;
+        int min_lat = (int) (this.latitude-this.lat_span)-40;
+        int max_lat = (int) (this.latitude+this.lat_span)+40;
         
         /* Création du stand du joueur */
         Random rand = new Random();
@@ -252,7 +252,12 @@ public class Map {
         
                
     }
-    public void mapload(){
+    public void mapload(double longitude, double latitude, double long_span, double lat_span, ArrayList<Joueur> joueur){
+        this.longitude=longitude;
+        this.latitude=latitude;
+        this.long_span=long_span;
+        this.lat_span=lat_span;
+        this.joueur=joueur;
        
     
     
@@ -267,32 +272,32 @@ public class Map {
     }
     }
     
-    public void LancerVente(ArrayList<String> weather){
+    public void LancerVente(String weather){
         int i=0;
-        switch(weather.get(0)){
+        switch(weather){
             case "thunderstrom":
                 for(i=this.client.size(); i<this.client.size(); i++){
-                    this.client.get(i).analyse();
+                    this.client.get(i).buy();
                 }
                 break;
             case "rainny":
                 for(i=(this.client.size()*85)/100; i<this.client.size(); i++){
-                    this.client.get(i).analyse();
+                    this.client.get(i).buy();
                 }
                 break;
             case "cloudy":
                 for(i=(this.client.size()*70)/100; i<this.client.size(); i++){
-                    this.client.get(i).analyse();
+                    this.client.get(i).buy();
                 }
                 break;
             case "sunny":
                 for(i = (this.client.size()*25)/100; i<this.client.size(); i++){
-                    this.client.get(i).analyse();
+                    this.client.get(i).buy();
                 }
                 break;
             case "heatwave":
                 for(i=0; i<this.client.size(); i++){
-                    this.client.get(i).analyse();
+                    this.client.get(i).buy();
                 }
                 break;
         }
