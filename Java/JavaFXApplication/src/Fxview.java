@@ -83,10 +83,10 @@ public class Fxview extends Application {
 
                        carte = new Map(view.composantCarte.getJSONObject("map").getJSONObject("region").getJSONObject("center").getDouble("longitude"),view.composantCarte.getJSONObject("map").getJSONObject("region").getJSONObject("center").getDouble("latitude"),view.composantCarte.getJSONObject("map").getJSONObject("region").getJSONObject("span").getDouble("longitudeSpan"),view.composantCarte.getJSONObject("map").getJSONObject("region").getJSONObject("span").getDouble("latitudeSpan"),joueur);
 
-                        carte.setCurrent_weather(weather.getJSONArray("weather").getJSONObject(0).getString("weather"));
-                        carte.setCurrent_weather(weather.getJSONArray("weather").getJSONObject(1).getString("weather"));
-                        System.out.println(weather.getJSONArray("weather").getJSONObject(0).getString("weather"));
-                        System.out.println(weather.getJSONArray("weather").getJSONObject(1).getString("weather"));
+                        carte.setCurrent_weather(view.weather.getJSONArray("weather").getJSONObject(0).getString("weather"));
+                        carte.setCurrent_weather(view.weather.getJSONArray("weather").getJSONObject(1).getString("weather"));
+                        System.out.println(view.weather.getJSONArray("weather").getJSONObject(0).getString("weather"));
+                        System.out.println(view.weather.getJSONArray("weather").getJSONObject(1).getString("weather"));
                       carte.NombreClient();
 
 
@@ -130,9 +130,9 @@ public class Fxview extends Application {
                         primaryStage.setScene(new Scene(root));
                         primaryStage.show();
                         carte.movement();
-                                    } catch (Exception ex) {
-                                        Logger.getLogger(Fxview.class.getName()).log(Level.SEVERE, null, ex);
-                                    }
+                    } catch (Exception ex) {
+                        Logger.getLogger(Fxview.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 });
             }
         }, 0, 3000);
