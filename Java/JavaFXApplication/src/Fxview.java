@@ -79,7 +79,7 @@ public class Fxview extends Application {
                         carte.setCurrent_weather(weather.getJSONArray("weather").getJSONObject(1).getString("weather"));
                        // System.out.println(weather.getJSONArray("weather").getJSONObject(0).getString("weather"));
                         //System.out.println(weather.getJSONArray("weather").getJSONObject(1).getString("weather"));
-                      carte.NombreClient();
+                      carte.NombreClient(carte.getCurrent_weather());
         
         
                          heure=com.GetDay();
@@ -101,6 +101,7 @@ public class Fxview extends Application {
                         
                         heure=com.GetDay();
                          System.out.println(com.GetDay());
+                         System.out.println(carte.getCurrent_weather());
                          if(heure!=current){
                              current=heure;
                          for(int i=0;i<carte.getJoueur().size();i++){
@@ -134,7 +135,8 @@ public class Fxview extends Application {
                         carte.setCurrent_weather(weather.getJSONArray("weather").getJSONObject(1).getString("weather"));
                        // System.out.println(weather.getJSONArray("weather").getJSONObject(0).getString("weather"));
                         //System.out.println(weather.getJSONArray("weather").getJSONObject(1).getString("weather"));
-                      carte.NombreClient();
+                      carte.NombreClient(carte.getCurrent_weather());
+                             System.out.println(carte.getCurrent_weather());
                          
                          }
                          
@@ -165,7 +167,7 @@ public class Fxview extends Application {
                                     System.out.println(carte.getClient().get(i).getLongitude()+" "+carte.getClient().get(i).getLatitude());
 
                         }
-                       gb.fillRect(500, 500, 10, 10);
+                      // gb.fillRect(500, 500, 10, 10);
 
 
 

@@ -54,7 +54,7 @@ public class  main {
         
         
         
-      carte.NombreClient();
+      carte.NombreClient("");
       return carte;
         
       // for(int i =0;i<composantCarte.getJSONObject("map").getJSONArray("ranking").length();i++){

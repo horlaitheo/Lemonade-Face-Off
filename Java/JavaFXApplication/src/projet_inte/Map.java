@@ -191,8 +191,29 @@ public class Map {
     
     }
     
-    public void NombreClient(){
+    public void NombreClient(String weather){
         /* les messures de la map */
+       int coefClient=100;
+        switch(weather){
+            case "thunderstrom":
+                coefClient=20;
+                break;
+            case "rainny":
+                coefClient=50;
+                break;
+            case "cloudy":
+               coefClient=100;
+                break;
+            case "sunny":
+                coefClient=150;
+                
+                break;
+            case "heatwave":
+                coefClient=200;
+                
+                break;
+        }
+        
         int min_long = 50;
         int max_long = 950;
         int min_lat = 50;
@@ -200,21 +221,21 @@ public class Map {
         System.out.println(max_lat+""+min_lat);
         
         /* si il y a trop de client*/
-        if (this.client.size() > this.joueur.size()*50){
+        if (this.client.size() > this.joueur.size()*coefClient){
             /* suppression des clients en trop */
-            for(int i=this.client.size(); i>this.joueur.size()*50; i--){
+            for(int i=this.client.size(); i>this.joueur.size()*coefClient; i--){
                this.client.get(i).setLattitude(0);
                this.client.get(i).setLongitude(0);
                this.client.get(i).setJoueur(null);
                this.client.remove(i);
             }
            /* si il a pas assez de client */
-        }else if (this.client.size() < this.joueur.size()*50){
+        }else if (this.client.size() < this.joueur.size()*coefClient){
             /* ajout de nouveau client */
-            for(int i=0; this.client.size() < this.joueur.size()*50; i++){
+            for(int i=0; this.client.size() < this.joueur.size()*coefClient; i++){
                Random rand = new Random();
-               double longi = Math.random()*1000/*rand.nextInt(max_long-min_long + 1)+min_long*/;
-               double latti = Math.random()*1000/*rand.nextInt(max_lat-min_lat + 1)+min_lat*/;
+               double longi = Math.random()*1000;
+               double latti = Math.random()*1000;
                
                for(int t=0; t < this.joueur.size();t++){
                  
