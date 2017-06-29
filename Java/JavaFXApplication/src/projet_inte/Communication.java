@@ -149,7 +149,7 @@ public class Communication {
 				
 			
 			return map;*/
-                        System.out.println(jsonmap);
+                 //       System.out.println(jsonmap);
             return jsonmap;
                         
 }
@@ -314,7 +314,7 @@ public class Communication {
 			list.add(entjson.getJSONArray("weather").getJSONObject(1).getInt("dfn"));
 			list.add(entjson.getJSONArray("weather").getJSONObject(1).getString("weather"));
 			*/
-			System.out.println(entjson);
+			//System.out.println(entjson);
 			
 			return  entjson;
 								
