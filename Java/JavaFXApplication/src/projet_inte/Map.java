@@ -182,7 +182,14 @@ public class Map {
      * Mise à jour du nombre de client
      */
     
+    public void CheckTime(int heure){
+    if(heure==0){
+    for(int i=0;i<this.client.size();i++){
+        this.client.get(i).setAlready(true);
+    }
+    }
     
+    }
     
     public void NombreClient(){
         /* les messures de la map */
