@@ -31,7 +31,7 @@ public class Client {
      * @param lattitude
      * @param joueur 
      */
-    public Client(double longitude, double lattitude, ArrayList<Joueur> joueur) {
+    public Client(double longitude, double latitude, ArrayList<Joueur> joueur) {
         this.longitude = longitude;
         this.latitude = latitude;
         this.joueur = joueur;
