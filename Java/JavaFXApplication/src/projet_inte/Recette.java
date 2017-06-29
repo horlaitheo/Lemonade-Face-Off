@@ -13,9 +13,8 @@ import java.util.ArrayList;
  */
 public class Recette {
     private String nom;
-    private float cout;
-    private float prix;
-    private ArrayList<Ingredient> composition;
+    private double prix;
+   
     
     /**
      * Constructeur
@@ -23,18 +22,17 @@ public class Recette {
      * @param cout
      * @param composition 
      */
-    public Recette(String nom, float cout, float prix, ArrayList<Ingredient> composition) {
+    public Recette(String nom, double prix) {
         this.prix = prix;
         this.nom = nom;
-        this.cout = cout;
-        this.composition = composition;
+       
     }
     
     /**
      * 
      * @return le prix de la recette
      */
-    public float getPrix() {
+    public double getPrix() {
         return prix;
     }
 
@@ -42,7 +40,7 @@ public class Recette {
      * Définit le prix de la recette
      * @param prix 
      */
-    public void setPrix(float prix) {
+    public void setPrix(double prix) {
         this.prix = prix;
     }
     
@@ -61,47 +59,5 @@ public class Recette {
     public void setNom(String nom) {
         this.nom = nom;
     }
-    
-    /**
-     * 
-     * @return le cout de la recette
-     */
-    public float getCout() {
-        return cout;
-    }
-
-    /**
-     * Définit le cout de la recette
-     * @param cout 
-     */
-    public void setCout(float cout) {
-        this.cout = cout;
-    }
-
-    /**
-     * 
-     * @return la composition
-     */
-    public ArrayList<Ingredient> getComposition() {
-        return composition;
-    }
-
-    /**
-     * Définit la composition
-     * @param composition 
-     */
-    public void setComposition(ArrayList<Ingredient> composition) {
-        this.composition = composition;
-    }
-    
-    /**
-     * Calcul le nouveau cout de la recette
-     */
-    public void CalculCout(){
-        float newCout =0;
-        for(int i = 0; this.composition.size()>i; i++ ){
-            newCout += this.composition.get(i).getPrix();
-        }
-        this.cout = newCout;
-    }
+   
 }

@@ -13,12 +13,18 @@ import java.util.Random;
  * @author Théo
  */
 public class Joueur {
-    
+    private int quantity;
+
+    public void setQuantity(int quantity) {
+        this.quantity = this.quantity+quantity;
+    }
     private String nom;
-    private float budget;
-    private ArrayList<Prod> production;
+    private double budget;
+    protected ArrayList<MapItems> items;
+    
+    
     private ArrayList<Recette> recette;
-    private ArrayList<Emplacement>  emplacement;
+    
     
     /**
      * Constructeur du joueur
@@ -28,13 +34,15 @@ public class Joueur {
      * @param recette 
      * @param emplacement 
      */
-    public Joueur(String nom, float budget, ArrayList<Prod> production, ArrayList<Recette> recette, ArrayList<Emplacement>  emplacement) {
+    public Joueur(String nom, double budget, ArrayList<Recette> recette, ArrayList<MapItems> items) {
         this.nom = nom;
         this.budget = budget;
-        this.production = production;
+        this.items =items;
         this.recette = recette;
-        this.emplacement = emplacement;
-    }
+       
+    }  
+    
+    
     
     /**
      * 
@@ -56,7 +64,7 @@ public class Joueur {
      * 
      * @return le budget du joueur 
      */
-    public float getBudget() {
+    public double getBudget() {
         return budget;
     }
 
@@ -68,22 +76,10 @@ public class Joueur {
         this.budget = budget;
     }
 
-    /**
-     * 
-     * @return La production du joueur
-     */
-    public ArrayList<Prod> getProduction() {
-        return production;
-    }
+public ArrayList<MapItems> getItems(){
 
-    /**
-     * Définit la production du joueur
-     * @param production 
-     */
-    public void setProduction(ArrayList<Prod> production) {
-        this.production = production;
-    }
-
+ return items;
+}
     /**
      * 
      * @return Les recettes du joueur
@@ -100,80 +96,7 @@ public class Joueur {
         this.recette = recette;
     }
 
-    /**
-     * 
-     * @return les emplacements du joueur
-     */
-    public ArrayList<Emplacement> getEmplacement() {
-        return emplacement;
-    }
-
-    /**
-     * Définit les emplacements du joueur
-     * @param emplacement 
-     */
-    public void setEmplacement(ArrayList<Emplacement> emplacement) {
-        this.emplacement = emplacement;
-    }
+   
     
-    /**
-     * calcul le cout de la production et met le budget à jour
-     */
-    public void CalculProd(){
-        /* parcours les productions du joueur */
-        for(int i=0; i<this.production.size(); i++){
-            /* parcours des recettes du joueur */
-            for(int j=0; j<this.recette.size(); j++){
-               /* Si la prod et la recette ont le même nom de boisson on met à jour le budjet */
-               if( this.production.get(i).recette == this.recette.get(j).getNom()){
-                   this.budget -= this.production.get(i).quantite*this.recette.get(j).getCout();
-               }
-            }
-        } 
-    }
     
-    /**
-     * Vérifie si le stock n'est pas à 0
-     * @return 1 si plus de stock et 0 si il en reste
-     */
-    public int stockProd(){
-        int stock=0;
-        /* Vérification du stock de boisson */
-        for(int i=0; i<this.production.size(); i++){
-            if (this.production.get(i).quantite == 0){
-                stock++;
-            }
-        }
-        
-        /* Si le nombre de stock vide est égale au nombre de boisson prod */
-        if(stock == this.production.size()){
-            return 1;
-        }else{
-            return 0;
-        }
-    }
-    
-    /**
-     * Produit une vente et met le budget à jour
-     * @return 1 si aucune vente n'est possible 0 sinon
-     */
-    public int CalculVente(){
-        boolean vente = false;
-        if (stockProd() == 0){
-            /* Tant qu'aucune vente n'as été faite */
-            while(vente == false){
-                /* vente d'une boisson aléatoire */
-                Random rand = new Random();
-                int nombreAleatoire = rand.nextInt(this.production.size());
-                if (this.production.get(nombreAleatoire).quantite > 0){
-                    this.production.get(nombreAleatoire).quantite -= 1;
-                    this.budget += this.production.get(nombreAleatoire).prixVente;
-                    vente = true;
-                }
-            }
-            return 0;
-        }else{
-            return 1;
-        }
-    }
 }

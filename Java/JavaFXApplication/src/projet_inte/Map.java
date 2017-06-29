@@ -13,10 +13,10 @@ import java.util.Random;
  * @author Théo
  */
 public class Map {
-    private float longitude;
-    private float lattitude;
-    private float long_span;
-    private float lat_span;
+    private double longitude;
+    private double lattitude;
+    private double long_span;
+    private double lat_span;
     private ArrayList<Joueur> joueur;
     private ArrayList<Client> client;
     private static Map INSTANCE = null;
@@ -30,13 +30,13 @@ public class Map {
      * @param joueur 
      * @param client 
      */
-    private Map(float longitude, float lattitude, float long_span, float lat_span, ArrayList<Joueur> joueur, ArrayList<Client> client) {
+   public Map(double longitude, double lattitude, double long_span, double lat_span, ArrayList<Joueur> joueur) {
         this.longitude = longitude;
         this.lattitude = lattitude;
         this.long_span = long_span;
         this.lat_span = lat_span;
         this.joueur = joueur;
-        this.client = client;
+        this.client =  new ArrayList();
     }
     
     /**
@@ -49,18 +49,19 @@ public class Map {
      * @param client
      * @return l'instance de la map
      */
-    public static Map getInstance(float longitude, float lattitude, float long_span, float lat_span, ArrayList<Joueur> joueur, ArrayList<Client> client){
+    public static Map getInstance(double longitude, double lattitude, double long_span, double lat_span, ArrayList<Joueur> joueur){
         if (INSTANCE == null){
-            INSTANCE = new Map( longitude, lattitude, long_span, lat_span, joueur, client);
+            INSTANCE = new Map( longitude, lattitude, long_span, lat_span, joueur);
         }
         return INSTANCE;
     }
+
     
     /**
      * 
      * @return la longitude de la map 
      */
-    public float getLongitude() {
+    public double getLongitude() {
         return longitude;
     }
     
@@ -76,7 +77,7 @@ public class Map {
      * 
      * @return la lattitude de la map
      */
-    public float getLattitude() {
+    public double getLattitude() {
         return lattitude;
     }
     
@@ -84,7 +85,7 @@ public class Map {
      * Définit la lattitude de la map
      * @param lattitude 
      */
-    public void setLattitude(float lattitude) {
+    public void setLattitude(double lattitude) {
         this.lattitude = lattitude;
     }
     
@@ -92,7 +93,7 @@ public class Map {
      * 
      * @return le span de la map
      */
-    public float getLong_span() {
+    public double getLong_span() {
         return long_span;
     }
     
@@ -100,7 +101,7 @@ public class Map {
      * Définit le span de la map
      * @param long_span 
      */
-    public void setLong_span(float long_span) {
+    public void setLong_span(double long_span) {
         this.long_span = long_span;
     }
     
@@ -108,7 +109,7 @@ public class Map {
      * 
      * @return le span de la map
      */
-    public float getLat_span() {
+    public double getLat_span() {
         return lat_span;
     }
     
@@ -116,7 +117,7 @@ public class Map {
      * Définit le span de la map
      * @param lat_span 
      */
-    public void setLat_span(float lat_span) {
+    public void setLat_span(double lat_span) {
         this.lat_span = lat_span;
     }
     
@@ -149,20 +150,23 @@ public class Map {
      * @param client 
      */
     public void setClient(ArrayList<Client> client) {
-        this.client = client;
+        this.client=client;
     }
     
     /**
      * Mise à jour de la taille de la map
      */
     public void tailleMap(){
-        this.lat_span = this.joueur.size()*50;
-        this.long_span = this.joueur.size()*50;
+        //this.lat_span = this.joueur.size()*100;
+        //this.long_span = this.joueur.size()*100;
     }
     
     /**
      * Mise à jour du nombre de client
      */
+    
+    
+    
     public void NombreClient(){
         /* les messures de la map */
         int min_long = (int) (this.longitude-this.long_span);
@@ -200,10 +204,10 @@ public class Map {
      */
     public void createJoueur(String nom, ArrayList<Prod> production, ArrayList<Recette> recette){
         /* les messures de la map */
-        int min_long = (int) (this.longitude-this.long_span)+20;
-        int max_long = (int) (this.longitude+this.long_span)-20;
-        int min_lat = (int) (this.lattitude-this.lat_span)-20;
-        int max_lat = (int) (this.lattitude+this.lat_span)+20;
+        int min_long = (int) (this.longitude-this.long_span)+40;
+        int max_long = (int) (this.longitude+this.long_span)-40;
+        int min_lat = (int) (this.lattitude-this.lat_span)-40;
+        int max_lat = (int) (this.lattitude+this.lat_span)+40;
         
         /* Création du stand du joueur */
         Random rand = new Random();
@@ -213,9 +217,7 @@ public class Map {
         ArrayList<Emplacement> emplacement = new ArrayList();
         emplacement.add(stand);
         
-        /* création du joueur */
-        Joueur player = new Joueur(nom, 100, production, recette, emplacement);
-        this.joueur.add(player);
+        
                
     }
     

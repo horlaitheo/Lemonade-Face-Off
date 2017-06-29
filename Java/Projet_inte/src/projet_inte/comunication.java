@@ -1,9 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * @date 21/06/2017
+ * @author Adrien Corre
+ *
  */
-package projet_inte;
+/**
+ * import necessaire au bon fonctionnement du programme.
+ */
+package apiJavaProjetInte;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.InputStreamReader;
@@ -12,14 +15,23 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import javax.net.ssl.HttpsURLConnection;
 import java.util.ArrayList;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Iterator;
+
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.type.TypeReference;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import apiJavaProjetInte.Coordinates;
+import apiJavaProjetInte.*;
+
 /**
  * 
  * @author Adrien Corre
  * Déclaration de la classe communication
  */
-public class Communication {
+public class comunication {
 	
 	private final String USER_AGENT = "Mozilla/5.0"; 					/**Parametre pris en compte pour les requête http */
 	
@@ -68,7 +80,7 @@ public class Communication {
 	 * @throws Exception capture les exeptions qui peuvent apparaitre et envoie un message qui est directement pris de la classe mere
 	 * int responseCode variable qui récupère le code retour émise par le serveur lors de la requête
 	 */
-	public JSONObject Getmap() throws Exception {
+	public void Getmap() throws Exception {
 
 			String url = "http://limonade-equipe7.herokuapp.com/map";    	 /** url utilisé plus loin pour les requêtes prend le sting url */
 			URL obj = new URL(url);                  						 /** Déclaration d'une nouvelle instance de la classe importé URL */
@@ -93,22 +105,21 @@ public class Communication {
 			in.close();
 			
 			JSONObject jsonmap= new JSONObject(response.toString());
-			/*ArrayList rank = new ArrayList();
-			ArrayList<Object> map = new ArrayList();
+			ArrayList rank = new ArrayList();
+			ArrayList map = new ArrayList();
 			
 			
-			map.add(jsonmap.getJSONObject("region").getJSONObject("center").getDouble("longitude"));
 			map.add(jsonmap.getJSONObject("region").getJSONObject("center").getDouble("latitude"));
-			map.add(jsonmap.getJSONObject("region").getJSONObject("span").getDouble("longitudeSpan"));
+			map.add(jsonmap.getJSONObject("region").getJSONObject("center").getDouble("longitude"));
 			map.add(jsonmap.getJSONObject("region").getJSONObject("span").getDouble("latitudeSpan"));
+			map.add(jsonmap.getJSONObject("region").getJSONObject("span").getDouble("longitudeSpan"));
 			
 			for (int i = 0; i < jsonmap.getJSONArray("ranking").length(); i++) {
 				
-				
+				map.add(jsonmap.getJSONArray("ranking").getString(i));
 				rank.add(jsonmap.getJSONArray("ranking").getString(i));
 				
 			}
-                        map.add(rank);
 			for(int i = 0;i<rank.size();i++){
 				for(int j =0;j<jsonmap.getJSONObject("itemsByPlayer").getJSONArray(jsonmap.getJSONArray("ranking").getString(i)).length();j++){
 				
@@ -148,11 +159,8 @@ public class Communication {
 				
 				
 			
-			return map;*/
-                        System.out.println(jsonmap);
-            return jsonmap;
-                        
-}
+			
+	}
 
 	
 	private ArrayList GetQuitter() throws Exception {
@@ -281,7 +289,7 @@ public class Communication {
 	 * @throws Exception capture les exeptions qui peuvent apparaitre et envoie un message qui est directement pris de la classe mere
 	 * int responseCode variable qui récupère le code retour émise par le serveur lors de la requête
 	 */
-	public JSONObject GetWeather() throws Exception {
+	public ArrayList GetWeather() throws Exception {
 
 			String url = "http://limonade-equipe7.herokuapp.com/metrology"	 /**"http://limonade-equipe7.herokuapp.com/GET/metrology"*/;    	 /** url utilisé plus loin pour les requêtes prend le sting url */
 			URL obj = new URL(url);                  						 /** Déclaration d'une nouvelle instance de la classe importé URL */
@@ -307,16 +315,16 @@ public class Communication {
 			}																/** Boucle qui écrit dans response tant que inputLine (qui contient in.readLine) n'est pas  NULL */ 						
 			in.close();
 			JSONObject entjson= new JSONObject(response.toString());
-			/*ArrayList list = new ArrayList();
+			ArrayList list = new ArrayList();
 			list.add(entjson.getInt("timestamp"));
 			list.add(entjson.getJSONArray("weather").getJSONObject(0).getInt("dfn"));
 			list.add(entjson.getJSONArray("weather").getJSONObject(0).getString("weather"));
 			list.add(entjson.getJSONArray("weather").getJSONObject(1).getInt("dfn"));
 			list.add(entjson.getJSONArray("weather").getJSONObject(1).getString("weather"));
-			*/
-			System.out.println(entjson);
 			
-			return  entjson;
+			System.out.println(list);
+			
+			return  list;
 								
 	
 	
