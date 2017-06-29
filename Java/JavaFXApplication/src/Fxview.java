@@ -32,6 +32,7 @@ public class Fxview extends Application {
     
         Communication com =new Communication();
         JSONObject composantCarte= new JSONObject();
+        
         int heure;
         JSONObject weather= new JSONObject();
        
@@ -42,6 +43,7 @@ public class Fxview extends Application {
     public void start(Stage primaryStage) throws Exception {
       
         weather = com.GetWeather();
+        
         composantCarte = com.Getmap();
          
         int heure;
@@ -69,8 +71,10 @@ public class Fxview extends Application {
        
        carte = new Map(composantCarte.getJSONObject("map").getJSONObject("region").getJSONObject("center").getDouble("longitude"),composantCarte.getJSONObject("map").getJSONObject("region").getJSONObject("center").getDouble("latitude"),composantCarte.getJSONObject("map").getJSONObject("region").getJSONObject("span").getDouble("longitudeSpan"),composantCarte.getJSONObject("map").getJSONObject("region").getJSONObject("span").getDouble("latitudeSpan"),joueur);
         
-        
-        
+        carte.setCurrent_weather(weather.getJSONArray("weather").getJSONObject(0).getString("weather"));
+        carte.setCurrent_weather(weather.getJSONArray("weather").getJSONObject(1).getString("weather"));
+        System.out.println(weather.getJSONArray("weather").getJSONObject(0).getString("weather"));
+        System.out.println(weather.getJSONArray("weather").getJSONObject(1).getString("weather"));
       carte.NombreClient();
      
        
@@ -119,6 +123,7 @@ public class Fxview extends Application {
 
             @Override
             public void run() {
+                carte.movement();
                 
             }
         }, 0, 3000);
