@@ -71,24 +71,24 @@ public class Client {
     }
     
     public void chooseCloser(ArrayList<Joueur> joueur){
-       double lon=600.0;
-       double lat= 600.0;
-       double lonkept =0.0;
-       double latkept =0.0;
+       double lon=1000.0;
+       double lat= 1000.0;
+      double distancePoint=1000.0;
+      double lonkept=0.0;
+      double latkept=0.0;
        if(joueur!= null){
         for(int i =0;i<joueur.size();i++){
             for(int j =0;j<joueur.get(i).getItems().size();j++){
                 
             if((joueur.get(i).getItems().get(j).getKind()).compareTo("stand")==0 ){
                 
-            if((joueur.get(i).getItems().get(j).getLongitude()-longitude)<lon || (longitude-joueur.get(i).getItems().get(j).getLongitude())<lon){
-                lonkept=joueur.get(i).getItems().get(j).getLongitude();
+               if( Math.sqrt(Math.pow((this.longitude-joueur.get(i).getItems().get(j).longitude),2.0)+Math.pow((this.latitude-joueur.get(i).getItems().get(j).latitude),2.0))<distancePoint){
+               distancePoint=Math.sqrt(Math.pow((this.longitude-joueur.get(i).getItems().get(j).longitude),2.0)+Math.pow((this.latitude-joueur.get(i).getItems().get(j).latitude),2.0));
+               lonkept=joueur.get(i).getItems().get(j).longitude;
+               latkept=joueur.get(i).getItems().get(j).latitude;
+               }
                 
-            }
-              if((joueur.get(i).getItems().get(j).getLatitude()-latitude)<lon || (latitude-joueur.get(i).getItems().get(j).getLatitude())<lon){
-                latkept=joueur.get(i).getItems().get(j).getLatitude();
-                
-                             }        
+               
                         }
                     }
              }
@@ -153,6 +153,7 @@ public class Client {
         }
         
         //déplacement du client jusqu'au stand
+        buy();
     }
     
     /* recherche tout les zones dans lesquelles ce trouve dans le client */

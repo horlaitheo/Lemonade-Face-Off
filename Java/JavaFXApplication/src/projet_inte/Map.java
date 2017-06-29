@@ -200,18 +200,18 @@ public class Map {
         System.out.println(max_lat+""+min_lat);
         
         /* si il y a trop de client*/
-        if (this.client.size() > this.joueur.size()*100){
+        if (this.client.size() > this.joueur.size()*50){
             /* suppression des clients en trop */
-            for(int i=this.client.size(); i>this.joueur.size()*100; i--){
+            for(int i=this.client.size(); i>this.joueur.size()*50; i--){
                this.client.get(i).setLattitude(0);
                this.client.get(i).setLongitude(0);
                this.client.get(i).setJoueur(null);
                this.client.remove(i);
             }
            /* si il a pas assez de client */
-        }else if (this.client.size() < this.joueur.size()*100){
+        }else if (this.client.size() < this.joueur.size()*50){
             /* ajout de nouveau client */
-            for(int i=0; this.client.size() < this.joueur.size()*100; i++){
+            for(int i=0; this.client.size() < this.joueur.size()*50; i++){
                Random rand = new Random();
                double longi = Math.random()*1000/*rand.nextInt(max_long-min_long + 1)+min_long*/;
                double latti = Math.random()*1000/*rand.nextInt(max_lat-min_lat + 1)+min_lat*/;
